@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Power Hitters Turf Cricket, Vasai West</title>
+<meta name="description" content="Match day photos from Power Hitters turf cricket tournaments — sixes, wickets, and trophy moments from every season in Vasai West.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://powerhitters.co.in/gallery.html">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <img src="images/logo.svg" width="30" height="30" alt="Power Hitters logo">
+      <span class="lt">Power<span>Hitters</span></span>
+    </a>
+    <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="champions.html">Champions</a>
+      <a href="register.html">Register</a>
+    </div>
+    <div class="navcta">
+      <span class="live-pill"><span class="live-dot"></span> REG OPEN</span>
+      <a class="btn btn-primary" href="register.html">Register</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero turf-bg">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="over-dots"><span class="hit"></span><span class="hit"></span><span class="hit"></span><span class="hit"></span><span class="hit"></span><span></span></span>
+      MATCH DAY MOMENTS
+    </div>
+    <h1 class="display">THE <span class="accent">GALLERY.</span></h1>
+    <p class="lede">Sixes, wickets, trophy lifts and everything in between. Every Power Hitters season, captured.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="gal-filters">
+      <button class="gal-filter active" data-filter="all">All Photos</button>
+      <button class="gal-filter" data-filter="season3">Season 3</button>
+      <button class="gal-filter" data-filter="season2">Season 2</button>
+      <button class="gal-filter" data-filter="season1">Season 1</button>
+      <button class="gal-filter" data-filter="winners">Winners</button>
+    </div>
+
+    <div class="gal-grid" id="galGrid">
+      <!-- rendered by js/main.js -->
+    </div>
+
+    <div class="gal-manage">
+      <button class="btn btn-ghost" id="galClearAll">Clear My Uploaded Photos</button>
+    </div>
+
+    <p class="form-note" style="margin-top:18px;max-width:640px;">
+      📌 Photos you add here are saved in <strong>this browser only</strong> (using local storage) —
+      they won't show up for other visitors yet. To make the gallery live for everyone, these photos
+      need to move to real image hosting or a small backend. Tell me when you're ready and I'll set
+      that part up properly.
+    </p>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-cap" id="lightboxCap"></div>
+</div>
+
+<!-- Upload modal -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal-box">
+    <h3 class="display" style="font-family:'Anton',sans-serif;">Add a Photo</h3>
+    <form id="uploadForm">
+      <div class="field">
+        <label for="uploadFile">Choose Photo</label>
+        <input type="file" id="uploadFile" accept="image/*" required>
+      </div>
+      <div class="field">
+        <label for="uploadCategory">Category</label>
+        <select id="uploadCategory" required>
+          <option value="season3">Season 3</option>
+          <option value="season2">Season 2</option>
+          <option value="season1">Season 1</option>
+          <option value="winners">Winners</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="uploadCaption">Caption (optional)</label>
+        <input type="text" id="uploadCaption" placeholder="e.g. Final over, Season 3">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="uploadCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<section class="section dark tight">
+  <div class="wrap">
+    <div class="register-cta">
+      <div>
+        <h2 class="display">Be part of<br>the next set.</h2>
+        <p>Register for Season 3 and get featured right here on the gallery wall.</p>
+      </div>
+      <div class="register-panel">
+        <a href="register.html" class="btn btn-primary">Register Online</a>
+        <div class="contact-row">
+          <span>Instagram: <a href="https://instagram.com/powerhitters.turf" target="_blank">@powerhitters.turf</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="index.html">
+        <img src="images/logo.svg" width="26" height="26" alt="Power Hitters logo">
+        <span class="lt" style="color:var(--chalk);">Power<span>Hitters</span></span>
+      </a>
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="champions.html">Champions</a>
+        <a href="register.html">Register</a>
+        <a href="https://instagram.com/powerhitters.turf" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Power Hitters, Vasai West.</span>
+      <span>Made for teams who play to win.</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/918329337246?text=Hi!%20I%20want%20to%20register%20for%20Power%20Hitters%20Season%203" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.474L4 29l7.716-1.867A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm6.951 17.03c-.294.826-1.457 1.512-2.383 1.71-.634.135-1.462.243-4.248-.913-3.564-1.477-5.86-5.09-6.038-5.326-.17-.235-1.44-1.917-1.44-3.658s.906-2.596 1.228-2.953c.322-.357.703-.446.937-.446.234 0 .468.002.673.013.216.011.505-.082.79.603.294.706.999 2.438 1.087 2.615.088.177.147.384.03.62-.117.235-.176.382-.35.588-.176.206-.37.46-.528.618-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.443 1.35 1.203 2.487 1.575 2.84 1.752.353.176.559.147.764-.088.206-.235.882-1.03 1.117-1.383.235-.353.47-.294.793-.176.323.118 2.05.966 2.402 1.142.353.176.588.264.674.412.088.147.088.853-.206 1.679z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
