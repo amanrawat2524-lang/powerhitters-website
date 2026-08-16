@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Power Hitters</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  .admin-wrap{max-width:1100px;margin:0 auto;padding:60px 24px;}
+  .login-box{max-width:380px;margin:80px auto;background:var(--turf-mid);border:1px solid var(--line);border-radius:var(--radius);padding:34px;}
+  .login-box h1{color:var(--chalk);font-size:24px;margin-bottom:20px;font-family:'Anton',sans-serif;text-transform:uppercase;}
+  .login-error{display:none;background:rgba(183,52,46,0.12);border:1px solid rgba(183,52,46,0.4);color:#ff9d95;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:16px;}
+  .stats-bar{color:var(--chalk-dim);font-size:14px;margin-bottom:20px;}
+  table.admin-table{width:100%;border-collapse:collapse;background:var(--turf-mid);border-radius:14px;overflow:hidden;font-size:13px;}
+  table.admin-table th{
+    background:var(--ink);color:var(--chalk-dim);text-align:left;padding:12px 14px;
+    font-size:11px;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;
+  }
+  table.admin-table td{padding:12px 14px;color:var(--chalk);border-top:1px solid var(--line);vertical-align:top;}
+  table.admin-table tr:hover td{background:rgba(255,201,60,0.04);}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:14px;}
+  .topbar h1{color:var(--chalk);font-size:28px;font-family:'Anton',sans-serif;text-transform:uppercase;}
+  #loadingMsg{color:var(--chalk-dim);padding:20px 0;}
+  .table-scroll{overflow-x:auto;}
+</style>
+</head>
+<body class="turf-bg-solid" style="min-height:100vh;">
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="logo-badge"><img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo"></span>
+    </a>
+    <div class="navcta">
+      <button id="logoutBtn" class="btn btn-ghost" style="display:none;">Log Out</button>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-wrap">
+
+  <!-- LOGIN -->
+  <div id="loginSection">
+    <div class="login-box">
+      <h1>Admin Login</h1>
+      <div class="login-error" id="loginError"></div>
+      <form id="loginForm">
+        <div class="field">
+          <label for="adminEmail">Email</label>
+          <input type="email" id="adminEmail" required>
+        </div>
+        <div class="field">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboardSection" style="display:none;">
+    <div class="topbar">
+      <h1>Registrations</h1>
+    </div>
+    <div class="stats-bar" id="statsBar"></div>
+    <div id="loadingMsg">Loading...</div>
+    <div class="table-scroll">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Captain</th>
+            <th>Phone</th>
+            <th>Players</th>
+            <th>Area</th>
+            <th>Notes</th>
+            <th>Submitted</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody id="regTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

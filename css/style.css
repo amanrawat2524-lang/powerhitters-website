@@ -56,6 +56,11 @@ nav{
 }
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;}
 .logo{display:flex;align-items:center;gap:10px;color:var(--chalk);}
+.logo-badge{
+  background:#fff;border-radius:10px;padding:4px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);flex-shrink:0;
+}
+.logo-badge img{display:block;border-radius:6px;}
 .logo svg{flex-shrink:0;}
 .logo .lt{font-family:'Anton',sans-serif;font-size:19px;letter-spacing:0.03em;line-height:1;}
 .logo .lt span{color:var(--floodlight);}
