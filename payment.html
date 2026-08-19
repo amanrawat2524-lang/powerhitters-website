@@ -3,22 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Complete Payment — Power Hitters</title>
 <meta name="robots" content="noindex, nofollow">
+
 <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
 <nav>
   <div class="wrap">
+
     <a class="logo" href="index.html">
-      <span class="logo-badge"><img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo"></span>
+      <span class="logo-badge">
+        <img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo">
+      </span>
     </a>
-    <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <div class="navlinks">
       <a href="index.html">Home</a>
       <a href="tournaments.html">Tournaments</a>
@@ -26,91 +39,620 @@
       <a href="champions.html">Champions</a>
       <a href="register.html">Register</a>
     </div>
+
   </div>
 </nav>
 
+
 <header class="page-hero turf-bg">
+
   <div class="wrap">
+
     <div class="eyebrow">
-      <span class="over-dots"><span class="hit"></span><span class="hit"></span><span class="hit"></span><span class="hit"></span><span class="hit"></span><span class="hit"></span></span>
+
+      <span class="over-dots">
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span class="hit"></span>
+      </span>
+
       STEP 2 OF 2
+
     </div>
-    <h1 class="display">COMPLETE YOUR <span class="accent">PAYMENT.</span></h1>
-    <p class="lede" id="teamGreeting">Your registration is in! One last step — pay the entry fee to lock your slot.</p>
+
+    <h1 class="display">
+      SECURE YOUR <span class="accent">SLOT.</span>
+    </h1>
+
+    <p class="lede" id="teamGreeting">
+      Your registration is saved. Pay ₹500 advance to confirm your team slot.
+    </p>
+
   </div>
+
 </header>
 
+
 <section class="section tight">
-  <div class="wrap" style="max-width:520px;">
+
+  <div class="wrap" style="max-width:560px;">
 
     <div class="pay-card">
-      <h3 class="display" style="font-family:'Anton',sans-serif;">Entry Fee</h3>
-      <div class="amt">₹2,500</div>
 
-      <div class="pay-qr">
-        <img src="images/upi-qr.png" alt="Scan to pay Power Hitters via UPI">
+      <h3 class="display" style="font-family:'Anton',sans-serif;">
+        Season 3 Registration
+      </h3>
+
+
+      <div
+        style="
+        background:var(--ink);
+        border:1px solid var(--line-strong);
+        border-radius:14px;
+        padding:18px;
+        margin:22px 0;
+        text-align:left;
+        "
+      >
+
+        <div class="sb-row">
+
+          <span class="sb-label">
+            Total Entry Fee
+          </span>
+
+          <span class="sb-value small">
+            ₹2,500
+          </span>
+
+        </div>
+
+
+        <div class="sb-row">
+
+          <span class="sb-label">
+            Pay Now
+          </span>
+
+          <span class="sb-value">
+            ₹500
+          </span>
+
+        </div>
+
+
+        <div class="sb-row">
+
+          <span class="sb-label">
+            Remaining
+          </span>
+
+          <span class="sb-value small">
+            ₹2,000
+          </span>
+
+        </div>
+
       </div>
 
-      <div class="pay-upi-row">
-        <span id="upiIdText">amanrawat2524-3@okicici</span>
-        <button class="copy-btn" id="copyUpiBtn">Copy</button>
+
+      <div class="amt">
+        ₹500 Advance
       </div>
 
-      <div class="pay-actions">
-        <a href="#" id="upiPayBtn" class="btn btn-primary btn-block">Pay ₹2,500 via UPI App</a>
-        <button type="button" id="paidBtn" class="btn btn-dark btn-block">I've Paid — Notify Power Hitters</button>
+
+      <button
+        type="button"
+        id="razorpayPayBtn"
+        class="btn btn-primary btn-block"
+      >
+        Pay ₹500 Securely
+      </button>
+
+
+      <div
+        id="paymentStatus"
+        style="
+        margin-top:16px;
+        font-size:12px;
+        color:var(--chalk-dim);
+        "
+      >
+        🔒 Secure payment via Razorpay
       </div>
+
+
+      <div
+        id="paymentError"
+        style="
+        display:none;
+        margin-top:18px;
+        background:rgba(183,52,46,0.12);
+        border:1px solid rgba(183,52,46,0.4);
+        color:#ff9d95;
+        border-radius:12px;
+        padding:15px;
+        font-size:13px;
+        line-height:1.5;
+        "
+      ></div>
+
+
+      <div
+        class="success-box"
+        id="paymentSuccess"
+        style="text-align:left;"
+      >
+
+        ✅ <strong>Payment Verified!</strong>
+
+        <br><br>
+
+        ₹500 advance payment received successfully.
+
+        <br>
+
+        Your Power Hitters Season 3 team slot is confirmed.
+
+        <br><br>
+
+        <strong>Remaining Amount:</strong> ₹2,000
+
+        <br>
+
+        Pay the remaining amount on match day.
+
+        <div
+          id="paymentReference"
+          style="
+          margin-top:12px;
+          font-family:'JetBrains Mono',monospace;
+          font-size:11px;
+          word-break:break-all;
+          "
+        ></div>
+
+      </div>
+
 
       <p class="pay-note">
-        📱 On mobile, "Pay via UPI App" opens Google Pay / PhonePe / Paytm directly with the
-        amount pre-filled. On desktop, scan the QR code with any UPI app. Once you're done,
-        tap <strong>"I've Paid"</strong> below — this sends us a separate confirmation on
-        WhatsApp so we know to lock your slot.
+
+        ₹500 is the booking advance for your team slot.
+
+        The remaining ₹2,000 will be collected on the tournament day.
+
+        Your registration is confirmed only after the payment is successfully verified.
+
       </p>
+
     </div>
 
-    <div class="success-box" id="paidSuccess" style="margin-top:20px;">
-      ✅ Thanks! We've noted that you've paid — we'll verify and confirm your slot shortly. Keep your payment screenshot handy in case we need it.
-    </div>
 
     <div class="info-list" style="margin-top:34px;">
+
       <div class="info-item">
-        <div class="ico">📞</div>
-        <div>
-          <h4>Facing an issue paying?</h4>
-          <p>Call or WhatsApp us directly at <a href="tel:+918329337246">+91 83293 37246</a></p>
+
+        <div class="ico">
+          📞
         </div>
+
+        <div>
+
+          <h4>Facing a payment issue?</h4>
+
+          <p>
+            Call or WhatsApp us at
+            <a href="tel:+918329337246">
+              +91 83293 37246
+            </a>
+          </p>
+
+        </div>
+
       </div>
+
     </div>
 
   </div>
+
 </section>
 
+
 <footer>
+
   <div class="wrap">
+
     <div class="foot-top">
+
       <a class="logo" href="index.html">
-        <span class="logo-badge"><img src="images/logo.jpg" width="36" height="36" alt="Power Hitters logo"></span>
+
+        <span class="logo-badge">
+          <img src="images/logo.jpg" width="36" height="36" alt="Power Hitters logo">
+        </span>
+
       </a>
+
       <div class="foot-links">
+
         <a href="index.html">Home</a>
         <a href="tournaments.html">Tournaments</a>
         <a href="gallery.html">Gallery</a>
         <a href="champions.html">Champions</a>
         <a href="register.html">Register</a>
+
       </div>
+
     </div>
+
+
     <div class="foot-bottom">
-      <span>© 2026 Power Hitters, Vasai West.</span>
-      <span>Made for teams who play to win.</span>
+
+      <span>
+        © 2026 Power Hitters, Vasai West.
+      </span>
+
+      <span>
+        Made for teams who play to win.
+      </span>
+
     </div>
+
   </div>
+
 </footer>
 
-<a href="https://wa.me/918329337246" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.474L4 29l7.716-1.867A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm6.951 17.03c-.294.826-1.457 1.512-2.383 1.71-.634.135-1.462.243-4.248-.913-3.564-1.477-5.86-5.09-6.038-5.326-.17-.235-1.44-1.917-1.44-3.658s.906-2.596 1.228-2.953c.322-.357.703-.446.937-.446.234 0 .468.002.673.013.216.011.505-.082.79.603.294.706.999 2.438 1.087 2.615.088.177.147.384.03.62-.117.235-.176.382-.35.588-.176.206-.37.46-.528.618-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.443 1.35 1.203 2.487 1.575 2.84 1.752.353.176.559.147.764-.088.206-.235.882-1.03 1.117-1.383.235-.353.47-.294.793-.176.323.118 2.05.966 2.402 1.142.353.176.588.264.674.412.088.147.088.853-.206 1.679z"/></svg>
+
+<a
+  href="https://wa.me/918329337246"
+  target="_blank"
+  class="wa-float"
+  aria-label="Chat on WhatsApp"
+>
+
+  <svg viewBox="0 0 32 32" fill="#fff">
+
+    <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.474L4 29l7.716-1.867A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm6.951 17.03c-.294.826-1.457 1.512-2.383 1.71-.634.135-1.462.243-4.248-.913-3.564-1.477-5.86-5.09-6.038-5.326-.17-.235-1.44-1.917-1.44-3.658s.906-2.596 1.228-2.953c.322-.357.703-.446.937-.446.234 0 .468.002.673.013.216.011.505-.082.79.603.294.706.999 2.438 1.087 2.615.088.177.147.384.03.62-.117.235-.176.382-.35.588-.176.206-.37.46-.528.618-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.443 1.35 1.203 2.487 1.575 2.84 1.752.353.176.559.147.764-.088.206-.235.882-1.03 1.117-1.383.235-.353.47-.294.793-.176.323.118 2.05.966 2.402 1.142.353.176.588.264.674.412.088.147.088.853-.206 1.679z"/>
+
+  </svg>
+
 </a>
 
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script src="js/main.js"></script>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var params = new URLSearchParams(window.location.search);
+
+  var registrationId = params.get('id') || '';
+  var teamName = params.get('team') || '';
+
+  var payBtn = document.getElementById('razorpayPayBtn');
+  var greeting = document.getElementById('teamGreeting');
+
+  var errorBox = document.getElementById('paymentError');
+
+  var successBox = document.getElementById('paymentSuccess');
+
+  var statusBox = document.getElementById('paymentStatus');
+
+  var referenceBox = document.getElementById('paymentReference');
+
+  var paymentVerified = false;
+
+
+  if (teamName && greeting) {
+
+    greeting.textContent =
+      teamName +
+      ', your registration is saved! Pay ₹500 advance to confirm your team slot.';
+
+  }
+
+
+  function showError(message) {
+
+    errorBox.textContent = '⚠️ ' + message;
+
+    errorBox.style.display = 'block';
+
+  }
+
+
+  function hideError() {
+
+    errorBox.style.display = 'none';
+
+    errorBox.textContent = '';
+
+  }
+
+
+  function resetButton() {
+
+    if (paymentVerified) return;
+
+    payBtn.disabled = false;
+
+    payBtn.textContent = 'Pay ₹500 Securely';
+
+  }
+
+
+  if (!registrationId) {
+
+    payBtn.disabled = true;
+
+    payBtn.textContent = 'Registration ID Missing';
+
+    showError(
+      'Please open this payment page after completing the registration form.'
+    );
+
+    return;
+
+  }
+
+
+  payBtn.addEventListener('click', async function () {
+
+    hideError();
+
+    payBtn.disabled = true;
+
+    payBtn.textContent = 'Creating Secure Payment...';
+
+
+    try {
+
+      // --------------------------------
+      // CREATE RAZORPAY ORDER
+      // --------------------------------
+
+      var createResponse = await fetch('/api/create-order', {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          registrationId: registrationId
+        })
+
+      });
+
+
+      var orderData = await createResponse.json();
+
+
+      if (!createResponse.ok || !orderData.success) {
+
+        throw new Error(
+          orderData.error || 'Could not create payment order.'
+        );
+
+      }
+
+
+      if (typeof window.Razorpay !== 'function') {
+
+        throw new Error(
+          'Razorpay Checkout could not load. Please refresh and try again.'
+        );
+
+      }
+
+
+      var options = {
+
+        key: orderData.key_id,
+
+        amount: orderData.amount,
+
+        currency: orderData.currency,
+
+        name: 'Power Hitters',
+
+        description: 'Season 3 - ₹500 Advance',
+
+        order_id: orderData.order_id,
+
+
+        handler: async function (response) {
+
+          payBtn.disabled = true;
+
+          payBtn.textContent = 'Verifying Payment...';
+
+          statusBox.textContent =
+            'Verifying your payment securely...';
+
+
+          try {
+
+            // --------------------------------
+            // VERIFY PAYMENT ON SERVER
+            // --------------------------------
+
+            var verifyResponse = await fetch('/api/verify-payment', {
+
+              method: 'POST',
+
+              headers: {
+                'Content-Type': 'application/json'
+              },
+
+              body: JSON.stringify({
+
+                registrationId: registrationId,
+
+                razorpay_payment_id:
+                  response.razorpay_payment_id,
+
+                razorpay_order_id:
+                  response.razorpay_order_id,
+
+                razorpay_signature:
+                  response.razorpay_signature
+
+              })
+
+            });
+
+
+            var verification =
+              await verifyResponse.json();
+
+
+            if (
+              !verifyResponse.ok ||
+              !verification.success
+            ) {
+
+              throw new Error(
+                verification.error ||
+                'Payment verification failed.'
+              );
+
+            }
+
+
+            paymentVerified = true;
+
+
+            statusBox.textContent =
+              '✅ Payment verified successfully';
+
+            statusBox.style.color = '#8fe0a8';
+
+
+            referenceBox.textContent =
+              'Payment ID: ' +
+              verification.payment_id;
+
+
+            successBox.classList.add('show');
+
+
+            successBox.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+
+
+            payBtn.style.display = 'none';
+
+
+          } catch (error) {
+
+            console.error(
+              'Payment verification error:',
+              error
+            );
+
+
+            statusBox.textContent =
+              'Payment verification requires attention.';
+
+
+            showError(
+              error.message ||
+              'Could not verify your payment. Please contact Power Hitters.'
+            );
+
+
+            resetButton();
+
+          }
+
+        },
+
+
+        modal: {
+
+          ondismiss: function () {
+
+            if (!paymentVerified) {
+
+              resetButton();
+
+            }
+
+          }
+
+        },
+
+
+        theme: {
+
+          color: '#b7342e'
+
+        }
+
+      };
+
+
+      var razorpay = new Razorpay(options);
+
+
+      razorpay.on(
+        'payment.failed',
+        function (response) {
+
+          console.error(
+            'Razorpay payment failed:',
+            response.error
+          );
+
+
+          showError(
+            'Payment was not completed. You can retry the payment.'
+          );
+
+        }
+      );
+
+
+      payBtn.textContent = 'Payment Window Open...';
+
+
+      razorpay.open();
+
+
+    } catch (error) {
+
+      console.error(
+        'Razorpay start error:',
+        error
+      );
+
+
+      showError(
+        error.message ||
+        'Could not start payment. Please try again.'
+      );
+
+
+      resetButton();
+
+    }
+
+  });
+
+});
+
+</script>
+
+
 </body>
 </html>
