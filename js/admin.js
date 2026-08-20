@@ -417,89 +417,90 @@ document.addEventListener('DOMContentLoaded', function () {
 
       payCell.appendChild(badge);
 
+payCell.appendChild(badge);
 
-      // Manual admin override button
-      var toggleBtn =
-        document.createElement('button');
+// yahan naya code paste karo
 
+var isRazorpayVerified =
+  payment &&
+  payment.verified === true &&
+  payment.status === 'captured';
 
-      toggleBtn.className =
-        'copy-btn';
+if (isRazorpayVerified) {
 
+  var autoVerified =
+    document.createElement('div');
 
-      toggleBtn.style.marginLeft =
-        '8px';
+  autoVerified.style.marginTop = '8px';
+  autoVerified.style.fontSize = '10px';
+  autoVerified.style.color = '#8fe0a8';
+  autoVerified.style.fontWeight = '700';
 
+  autoVerified.textContent =
+    'AUTO VERIFIED 🔒';
 
-      toggleBtn.textContent =
-        row.payment_status === 'paid'
-          ? 'Mark Pending'
-          : 'Mark Paid';
+  payCell.appendChild(autoVerified);
 
+} else {
 
-      toggleBtn.addEventListener(
-        'click',
-        function () {
+  var toggleBtn =
+    document.createElement('button');
 
-          var newStatus =
-            row.payment_status === 'paid'
-              ? 'pending'
-              : 'paid';
+  toggleBtn.className = 'copy-btn';
+  toggleBtn.style.marginLeft = '8px';
 
+  toggleBtn.textContent =
+    row.payment_status === 'paid'
+      ? 'Mark Pending'
+      : 'Mark Paid';
 
-          toggleBtn.disabled = true;
+  toggleBtn.addEventListener('click', function () {
+
+    var newStatus =
+      row.payment_status === 'paid'
+        ? 'pending'
+        : 'paid';
+
+    toggleBtn.disabled = true;
+    toggleBtn.textContent = 'Saving...';
+
+    supabaseClient
+      .from('registrations')
+      .update({
+        payment_status: newStatus,
+        paid_at:
+          newStatus === 'paid'
+            ? new Date().toISOString()
+            : null
+      })
+      .eq('id', row.id)
+      .then(function (result) {
+
+        if (result.error) {
+          alert(
+            'Could not update: ' +
+            result.error.message
+          );
+
+          toggleBtn.disabled = false;
 
           toggleBtn.textContent =
-            'Saving...';
+            row.payment_status === 'paid'
+              ? 'Mark Pending'
+              : 'Mark Paid';
 
-
-          supabaseClient
-            .from('registrations')
-            .update({
-
-              payment_status:
-                newStatus,
-
-              paid_at:
-                newStatus === 'paid'
-                  ? new Date().toISOString()
-                  : null
-
-            })
-            .eq(
-              'id',
-              row.id
-            )
-            .then(function (result) {
-
-              if (result.error) {
-
-                alert(
-                  'Could not update: ' +
-                  result.error.message
-                );
-
-                toggleBtn.disabled = false;
-
-                toggleBtn.textContent =
-                  row.payment_status === 'paid'
-                    ? 'Mark Pending'
-                    : 'Mark Paid';
-
-                return;
-
-              }
-
-
-              loadDashboardData();
-
-            });
-
+          return;
         }
-      );
 
+        loadDashboardData();
 
-      payCell.appendChild(toggleBtn);
+      });
+
+  });
+
+  payCell.appendChild(toggleBtn);
+}
+     
 
 
       // =========================================
