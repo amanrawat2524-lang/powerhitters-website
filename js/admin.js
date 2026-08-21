@@ -417,90 +417,90 @@ document.addEventListener('DOMContentLoaded', function () {
 
       payCell.appendChild(badge);
 
-payCell.appendChild(badge);
 
-// yahan naya code paste karo
+      var isRazorpayVerified =
+        payment &&
+        payment.verified === true &&
+        payment.status === 'captured';
 
-var isRazorpayVerified =
-  payment &&
-  payment.verified === true &&
-  payment.status === 'captured';
 
-if (isRazorpayVerified) {
+      if (isRazorpayVerified) {
 
-  var autoVerified =
-    document.createElement('div');
+        var autoVerified =
+          document.createElement('div');
 
-  autoVerified.style.marginTop = '8px';
-  autoVerified.style.fontSize = '10px';
-  autoVerified.style.color = '#8fe0a8';
-  autoVerified.style.fontWeight = '700';
+        autoVerified.style.marginTop = '8px';
+        autoVerified.style.fontSize = '10px';
+        autoVerified.style.color = '#8fe0a8';
+        autoVerified.style.fontWeight = '700';
 
-  autoVerified.textContent =
-    'AUTO VERIFIED 🔒';
+        autoVerified.textContent =
+          'AUTO VERIFIED 🔒';
 
-  payCell.appendChild(autoVerified);
+        payCell.appendChild(autoVerified);
 
-} else {
+      } else {
 
-  var toggleBtn =
-    document.createElement('button');
+        var toggleBtn =
+          document.createElement('button');
 
-  toggleBtn.className = 'copy-btn';
-  toggleBtn.style.marginLeft = '8px';
+        toggleBtn.className = 'copy-btn';
+        toggleBtn.style.marginLeft = '8px';
 
-  toggleBtn.textContent =
-    row.payment_status === 'paid'
-      ? 'Mark Pending'
-      : 'Mark Paid';
+        toggleBtn.textContent =
+          row.payment_status === 'paid'
+            ? 'Mark Pending'
+            : 'Mark Paid';
 
-  toggleBtn.addEventListener('click', function () {
+        toggleBtn.addEventListener('click', function () {
 
-    var newStatus =
-      row.payment_status === 'paid'
-        ? 'pending'
-        : 'paid';
-
-    toggleBtn.disabled = true;
-    toggleBtn.textContent = 'Saving...';
-
-    supabaseClient
-      .from('registrations')
-      .update({
-        payment_status: newStatus,
-        paid_at:
-          newStatus === 'paid'
-            ? new Date().toISOString()
-            : null
-      })
-      .eq('id', row.id)
-      .then(function (result) {
-
-        if (result.error) {
-          alert(
-            'Could not update: ' +
-            result.error.message
-          );
-
-          toggleBtn.disabled = false;
-
-          toggleBtn.textContent =
+          var newStatus =
             row.payment_status === 'paid'
-              ? 'Mark Pending'
-              : 'Mark Paid';
+              ? 'pending'
+              : 'paid';
 
-          return;
-        }
+          toggleBtn.disabled = true;
+          toggleBtn.textContent = 'Saving...';
 
-        loadDashboardData();
+          supabaseClient
+            .from('registrations')
+            .update({
+              payment_status: newStatus,
+              paid_at:
+                newStatus === 'paid'
+                  ? new Date().toISOString()
+                  : null
+            })
+            .eq('id', row.id)
+            .then(function (result) {
 
-      });
+              if (result.error) {
 
-  });
+                alert(
+                  'Could not update: ' +
+                  result.error.message
+                );
 
-  payCell.appendChild(toggleBtn);
-}
-     
+                toggleBtn.disabled = false;
+
+                toggleBtn.textContent =
+                  row.payment_status === 'paid'
+                    ? 'Mark Pending'
+                    : 'Mark Paid';
+
+                return;
+
+              }
+
+              loadDashboardData();
+
+            });
+
+        });
+
+        payCell.appendChild(toggleBtn);
+
+      }
 
 
       // =========================================
@@ -523,7 +523,7 @@ if (isRazorpayVerified) {
 
         var remainingAmount =
           Math.max(
-            2500 - paidAmount,
+            2499 - paidAmount,
             0
           );
 
