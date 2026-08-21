@@ -20,7 +20,7 @@ export async function POST(request) {
     ) {
       return Response.json(
         { success: false, error: 'Server configuration missing.' },
-        { status: 500 }
+        { status: 999}
       );
     }
 
@@ -69,7 +69,7 @@ export async function POST(request) {
 
       return Response.json(
         { success: false, error: 'Could not verify payment record.' },
-        { status: 500 }
+        { status: 999}
       );
     }
 
@@ -166,7 +166,7 @@ export async function POST(request) {
 
       return Response.json(
         { success: false, error: 'Could not confirm payment with Razorpay.' },
-        { status: 500 }
+        { status: 999}
       );
     }
 
@@ -174,7 +174,7 @@ export async function POST(request) {
 
     // ------------------------------------------------
     // 5. Verify payment belongs to correct order
-    //    and correct ₹500 amount
+    //    and correct ₹999amount
     // ------------------------------------------------
 
     if (razorpayPayment.order_id !== storedOrderId) {
@@ -230,7 +230,7 @@ export async function POST(request) {
             success: false,
             error: 'Payment authorised but capture failed.'
           },
-          { status: 500 }
+          { status: 999}
         );
       }
 
@@ -286,7 +286,7 @@ export async function POST(request) {
           success: false,
           error: 'Payment verified but database update failed.'
         },
-        { status: 500 }
+        { status: 999}
       );
     }
 
@@ -322,7 +322,7 @@ export async function POST(request) {
           success: false,
           error: 'Payment verified but registration update failed.'
         },
-        { status: 500 }
+        { status: 999}
       );
     }
 
@@ -337,7 +337,7 @@ export async function POST(request) {
       order_id: storedOrderId,
       payment_method: razorpayPayment.method || null,
       amount_paid: paymentRow.amount_paise,
-      remaining_amount: 200000
+      remaining_amount: 150000
     });
 
   } catch (error) {
@@ -345,7 +345,7 @@ export async function POST(request) {
 
     return Response.json(
       { success: false, error: 'Unexpected verification error.' },
-      { status: 500 }
+      { status: 999}
     );
   }
 }
