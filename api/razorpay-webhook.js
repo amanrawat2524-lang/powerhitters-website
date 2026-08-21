@@ -17,7 +17,7 @@ export async function POST(request) {
       !SUPABASE_SECRET_KEY
     ) {
       return new Response('Server configuration missing', {
-        status: 500
+        status: 999
       });
     }
 
@@ -117,7 +117,7 @@ export async function POST(request) {
       );
 
       return new Response('Database lookup failed', {
-        status: 500
+        status: 999
       });
     }
 
@@ -192,7 +192,7 @@ export async function POST(request) {
       );
 
       return new Response('Payment update failed', {
-        status: 500
+        status: 999
       });
     }
 
@@ -223,7 +223,7 @@ export async function POST(request) {
       return new Response(
         'Registration update failed',
         {
-          status: 500
+          status: 999
         }
       );
     }
@@ -239,7 +239,7 @@ export async function POST(request) {
     );
 
     return new Response('Webhook error', {
-      status: 500
+      status: 999
     });
   }
 }
