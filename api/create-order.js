@@ -1,5 +1,5 @@
 // Power Hitters — Create Razorpay Order
-// ₹500 advance = 50000 paise
+// ₹999 advance = 99900 paise
 
 export async function POST(request) {
   try {
@@ -95,7 +95,7 @@ export async function POST(request) {
     }
 
     // ₹500 advance
-    const amount = 50000;
+    const amount = 99900;
 
     // Razorpay receipt must be unique and max 40 chars
     const receipt =
