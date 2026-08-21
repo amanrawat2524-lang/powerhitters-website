@@ -292,8 +292,17 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
   width:42px;height:42px;border-radius:12px;background:var(--turf-mid);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;
 }
-.info-item h4{color:var(--chalk);font-size:15px;margin-bottom:4px;}
-.info-item p{color:var(--chalk-dim);font-size:13.5px;line-height:1.5;}
+.info-item h4{
+  color:var(--ink);
+  font-size:15px;
+  margin-bottom:4px;
+}
+.info-item p{
+  color:#33443b;
+  font-size:13.5px;
+  line-height:1.5;
+  font-weight:500;
+}
 .success-box{
   display:none;background:rgba(120,200,140,0.12);border:1px solid rgba(120,200,140,0.35);
   border-radius:12px;padding:18px;color:#8fe0a8;font-size:13.5px;margin-top:16px;
