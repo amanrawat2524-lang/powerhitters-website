@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           var box = document.getElementById('formSuccess');
           if (box) box.classList.add('show');
-          setTimeout(function () { goToPayment(newId); }, 500);
+          goToPayment(newId);
         });
     });
   }
