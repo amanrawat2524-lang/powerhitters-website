@@ -1,7 +1,9 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
 // Power Hitters — Razorpay Payment Verification
-// Verifies signature + payment amount + order + capture status
+// Entry Fee: ₹2,499
+// Online Advance: ₹999
+// Remaining: ₹1,500
 
 export async function POST(request) {
   try {
@@ -19,8 +21,11 @@ export async function POST(request) {
       !SUPABASE_SECRET_KEY
     ) {
       return Response.json(
-        { success: false, error: 'Server configuration missing.' },
-        { status: 999}
+        {
+          success: false,
+          error: 'Server configuration missing.'
+        },
+        { status: 500 }
       );
     }
 
@@ -38,20 +43,21 @@ export async function POST(request) {
       !razorpaySignature
     ) {
       return Response.json(
-        { success: false, error: 'Payment verification data missing.' },
+        {
+          success: false,
+          error: 'Payment verification data missing.'
+        },
         { status: 400 }
       );
     }
 
     const supabaseHeaders = {
       apikey: SUPABASE_SECRET_KEY,
+      Authorization: `Bearer ${SUPABASE_SECRET_KEY}`,
       'Content-Type': 'application/json'
     };
 
-    // ------------------------------------------------
-    // 1. Get OUR stored Razorpay order from database
-    // ------------------------------------------------
-
+    // Get latest payment/order for this registration
     const paymentRowResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/payments?registration_id=eq.${encodeURIComponent(
         registrationId
@@ -68,8 +74,11 @@ export async function POST(request) {
       );
 
       return Response.json(
-        { success: false, error: 'Could not verify payment record.' },
-        { status: 999}
+        {
+          success: false,
+          error: 'Could not verify payment record.'
+        },
+        { status: 500 }
       );
     }
 
@@ -77,7 +86,10 @@ export async function POST(request) {
 
     if (!paymentRows.length) {
       return Response.json(
-        { success: false, error: 'Payment order not found.' },
+        {
+          success: false,
+          error: 'Payment order not found.'
+        },
         { status: 404 }
       );
     }
@@ -85,7 +97,18 @@ export async function POST(request) {
     const paymentRow = paymentRows[0];
     const storedOrderId = paymentRow.razorpay_order_id;
 
-    // Idempotency: already verified previously
+    // Only ₹999 orders are valid for the current tournament pricing
+    if (paymentRow.amount_paise !== 99900) {
+      return Response.json(
+        {
+          success: false,
+          error: 'Old or invalid payment order. Please create a new payment.'
+        },
+        { status: 409 }
+      );
+    }
+
+    // Already verified earlier
     if (
       paymentRow.verified === true &&
       paymentRow.razorpay_payment_id === paymentId &&
@@ -96,28 +119,23 @@ export async function POST(request) {
         already_verified: true,
         payment_id: paymentId,
         order_id: storedOrderId,
-        amount_paid: paymentRow.amount_paise
+        amount_paid: paymentRow.amount_paise,
+        remaining_amount: 150000
       });
     }
 
-    // ------------------------------------------------
-    // 2. Browser order ID must match OUR stored order
-    // ------------------------------------------------
-
+    // Checkout order must match our stored order
     if (checkoutOrderId !== storedOrderId) {
       return Response.json(
-        { success: false, error: 'Order ID mismatch.' },
+        {
+          success: false,
+          error: 'Order ID mismatch.'
+        },
         { status: 400 }
       );
     }
 
-    // ------------------------------------------------
-    // 3. Verify Razorpay HMAC SHA256 signature
-    //
-    // expected =
-    // HMAC_SHA256(order_id + "|" + payment_id, key_secret)
-    // ------------------------------------------------
-
+    // Verify Razorpay signature
     const expectedSignature = createHmac(
       'sha256',
       RAZORPAY_KEY_SECRET
@@ -133,18 +151,16 @@ export async function POST(request) {
       timingSafeEqual(expectedBuffer, receivedBuffer);
 
     if (!signatureValid) {
-      console.error('Invalid Razorpay signature');
-
       return Response.json(
-        { success: false, error: 'Payment signature verification failed.' },
+        {
+          success: false,
+          error: 'Payment signature verification failed.'
+        },
         { status: 400 }
       );
     }
 
-    // ------------------------------------------------
-    // 4. Fetch payment directly from Razorpay
-    // ------------------------------------------------
-
+    // Fetch payment directly from Razorpay
     const razorpayAuth = Buffer.from(
       `${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`
     ).toString('base64');
@@ -165,43 +181,60 @@ export async function POST(request) {
       );
 
       return Response.json(
-        { success: false, error: 'Could not confirm payment with Razorpay.' },
-        { status: 999}
+        {
+          success: false,
+          error: 'Could not confirm payment with Razorpay.'
+        },
+        { status: 500 }
       );
     }
 
-    let razorpayPayment = await razorpayPaymentResponse.json();
+    let razorpayPayment =
+      await razorpayPaymentResponse.json();
 
-    // ------------------------------------------------
-    // 5. Verify payment belongs to correct order
-    //    and correct ₹999amount
-    // ------------------------------------------------
-
+    // Verify order
     if (razorpayPayment.order_id !== storedOrderId) {
       return Response.json(
-        { success: false, error: 'Razorpay order mismatch.' },
+        {
+          success: false,
+          error: 'Razorpay order mismatch.'
+        },
+        { status: 400 }
+      );
+    }
+
+    // ₹999 = 99,900 paise
+    if (razorpayPayment.amount !== 99900) {
+      return Response.json(
+        {
+          success: false,
+          error: 'Payment amount mismatch.'
+        },
         { status: 400 }
       );
     }
 
     if (razorpayPayment.amount !== paymentRow.amount_paise) {
       return Response.json(
-        { success: false, error: 'Payment amount mismatch.' },
+        {
+          success: false,
+          error: 'Stored payment amount mismatch.'
+        },
         { status: 400 }
       );
     }
 
     if (razorpayPayment.currency !== 'INR') {
       return Response.json(
-        { success: false, error: 'Payment currency mismatch.' },
+        {
+          success: false,
+          error: 'Payment currency mismatch.'
+        },
         { status: 400 }
       );
     }
 
-    // ------------------------------------------------
-    // 6. If payment is only authorised, capture it
-    // ------------------------------------------------
-
+    // Capture if only authorised
     if (razorpayPayment.status === 'authorized') {
       const captureResponse = await fetch(
         `https://api.razorpay.com/v1/payments/${encodeURIComponent(
@@ -214,30 +247,34 @@ export async function POST(request) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            amount: paymentRow.amount_paise,
+            amount: 99900,
             currency: 'INR'
           })
         }
       );
 
-      const captureResult = await captureResponse.json();
+      const captureResult =
+        await captureResponse.json();
 
       if (!captureResponse.ok) {
-        console.error('Payment capture failed:', captureResult);
+        console.error(
+          'Payment capture failed:',
+          captureResult
+        );
 
         return Response.json(
           {
             success: false,
             error: 'Payment authorised but capture failed.'
           },
-          { status: 999}
+          { status: 500 }
         );
       }
 
       razorpayPayment = captureResult;
     }
 
-    // Slot should only be confirmed after capture
+    // Team confirmed only after capture
     if (razorpayPayment.status !== 'captured') {
       return Response.json(
         {
@@ -251,10 +288,7 @@ export async function POST(request) {
 
     const paidAt = new Date().toISOString();
 
-    // ------------------------------------------------
-    // 7. Update payments table
-    // ------------------------------------------------
-
+    // Update payments table
     const updatePaymentResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/payments?razorpay_order_id=eq.${encodeURIComponent(
         storedOrderId
@@ -286,14 +320,11 @@ export async function POST(request) {
           success: false,
           error: 'Payment verified but database update failed.'
         },
-        { status: 999}
+        { status: 500 }
       );
     }
 
-    // ------------------------------------------------
-    // 8. Mark team registration as PAID
-    // ------------------------------------------------
-
+    // Mark registration paid
     const updateRegistrationResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/registrations?id=eq.${encodeURIComponent(
         registrationId
@@ -322,13 +353,9 @@ export async function POST(request) {
           success: false,
           error: 'Payment verified but registration update failed.'
         },
-        { status: 999}
+        { status: 500 }
       );
     }
-
-    // ------------------------------------------------
-    // SUCCESS
-    // ------------------------------------------------
 
     return Response.json({
       success: true,
@@ -336,16 +363,22 @@ export async function POST(request) {
       payment_id: paymentId,
       order_id: storedOrderId,
       payment_method: razorpayPayment.method || null,
-      amount_paid: paymentRow.amount_paise,
+      amount_paid: 99900,
       remaining_amount: 150000
     });
 
   } catch (error) {
-    console.error('Verify payment error:', error);
+    console.error(
+      'Verify payment error:',
+      error
+    );
 
     return Response.json(
-      { success: false, error: 'Unexpected verification error.' },
-      { status: 999}
+      {
+        success: false,
+        error: 'Unexpected verification error.'
+      },
+      { status: 500 }
     );
   }
 }

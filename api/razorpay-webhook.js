@@ -1,7 +1,9 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
 // Power Hitters — Razorpay Webhook
-// Handles server-to-server payment confirmation
+// Entry Fee: ₹2,499
+// Online Advance: ₹999
+// Remaining: ₹1,500
 
 export async function POST(request) {
   try {
@@ -17,12 +19,12 @@ export async function POST(request) {
       !SUPABASE_SECRET_KEY
     ) {
       return new Response('Server configuration missing', {
-        status: 999
+        status: 500
       });
     }
 
     // IMPORTANT:
-    // Signature must be verified using RAW request body
+    // Razorpay signature must use the RAW request body.
     const rawBody = await request.text();
 
     const receivedSignature =
@@ -64,7 +66,7 @@ export async function POST(request) {
 
     const event = JSON.parse(rawBody);
 
-    // We only need captured payments here
+    // We only process captured payments.
     if (event.event !== 'payment.captured') {
       return new Response('Ignored event', {
         status: 200
@@ -95,12 +97,32 @@ export async function POST(request) {
       });
     }
 
+    // Current Power Hitters advance is exactly ₹999.
+    // Ignore any old ₹500 payment events.
+    if (amount !== 99900) {
+      console.log(
+        'Ignoring non-current payment amount:',
+        amount
+      );
+
+      return new Response('Ignored old payment amount', {
+        status: 200
+      });
+    }
+
+    if (currency !== 'INR') {
+      return new Response('Currency mismatch', {
+        status: 400
+      });
+    }
+
     const supabaseHeaders = {
       apikey: SUPABASE_SECRET_KEY,
+      Authorization: `Bearer ${SUPABASE_SECRET_KEY}`,
       'Content-Type': 'application/json'
     };
 
-    // Find OUR payment record by Razorpay order ID
+    // Find our payment using Razorpay Order ID.
     const paymentRowResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/payments?razorpay_order_id=eq.${encodeURIComponent(
         orderId
@@ -117,7 +139,7 @@ export async function POST(request) {
       );
 
       return new Response('Database lookup failed', {
-        status: 999
+        status: 500
       });
     }
 
@@ -137,7 +159,19 @@ export async function POST(request) {
 
     const paymentRow = paymentRows[0];
 
-    // Security checks
+    // Stored order must also be a current ₹999 order.
+    if (paymentRow.amount_paise !== 99900) {
+      console.error(
+        'Webhook: old payment row found',
+        orderId
+      );
+
+      return new Response('Ignored old payment order', {
+        status: 200
+      });
+    }
+
+    // Security checks.
     if (amount !== paymentRow.amount_paise) {
       return new Response('Amount mismatch', {
         status: 400
@@ -151,7 +185,7 @@ export async function POST(request) {
     }
 
     // Idempotency:
-    // if already processed, just return 200
+    // If already verified, do not process again.
     if (
       paymentRow.verified === true &&
       paymentRow.status === 'captured' &&
@@ -164,7 +198,7 @@ export async function POST(request) {
 
     const paidAt = new Date().toISOString();
 
-    // Update payments table
+    // Update payments table.
     const updatePaymentResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/payments?razorpay_order_id=eq.${encodeURIComponent(
         orderId
@@ -192,11 +226,11 @@ export async function POST(request) {
       );
 
       return new Response('Payment update failed', {
-        status: 999
+        status: 500
       });
     }
 
-    // Update related registration
+    // Mark related registration paid.
     const updateRegistrationResponse = await fetch(
       `${SUPABASE_URL}/rest/v1/registrations?id=eq.${encodeURIComponent(
         paymentRow.registration_id
@@ -223,7 +257,7 @@ export async function POST(request) {
       return new Response(
         'Registration update failed',
         {
-          status: 999
+          status: 500
         }
       );
     }
@@ -239,7 +273,7 @@ export async function POST(request) {
     );
 
     return new Response('Webhook error', {
-      status: 999
+      status: 500
     });
   }
 }
