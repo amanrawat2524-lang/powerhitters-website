@@ -1,0 +1,225 @@
+/* Power Hitters — Manual UPI registration */
+
+.register-direct{
+  padding-top:48px;
+}
+
+.register-heading{
+  max-width:760px;
+  margin-bottom:34px;
+}
+
+.register-heading h1{
+  margin-top:10px;
+}
+
+.register-heading p{
+  margin-top:12px;
+  color:#53665c;
+  line-height:1.65;
+  font-size:15px;
+}
+
+.manual-payment-card{
+  margin:30px 0 22px;
+  padding:26px;
+  border-radius:18px;
+  border:1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at top,rgba(255,201,60,.08),transparent 40%),
+    var(--ink);
+  text-align:center;
+}
+
+.payment-kicker{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:var(--chalk-dim);
+}
+
+.payment-amount{
+  margin-top:8px;
+  font-family:'Anton',sans-serif;
+  font-size:clamp(44px,7vw,64px);
+  line-height:1;
+  color:var(--floodlight);
+}
+
+.payment-subtitle{
+  margin:8px 0 20px;
+  color:var(--chalk-dim);
+  font-size:13px;
+}
+
+.payment-qr-frame{
+  display:inline-block;
+  width:min(100%,330px);
+  padding:12px;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+
+.payment-qr-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:10px;
+}
+
+.payment-upi-id{
+  max-width:430px;
+  margin:16px auto 12px;
+  padding:11px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:1px solid var(--line-strong);
+  border-radius:11px;
+  background:var(--turf-mid);
+}
+
+.payment-upi-id span{
+  min-width:0;
+  overflow-wrap:anywhere;
+  color:var(--chalk);
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+}
+
+.upi-app-btn{
+  display:inline-flex;
+  margin-top:2px;
+}
+
+.payment-breakdown{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.payment-breakdown div{
+  padding:12px 8px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:rgba(255,255,255,.03);
+}
+
+.payment-breakdown span,
+.payment-breakdown strong{
+  display:block;
+}
+
+.payment-breakdown span{
+  color:var(--chalk-dim);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.payment-breakdown strong{
+  margin-top:4px;
+  color:var(--chalk);
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+}
+
+.payment-instructions{
+  margin-top:18px;
+  padding:14px 15px;
+  border-radius:12px;
+  background:rgba(37,211,102,.08);
+  border:1px solid rgba(37,211,102,.22);
+  text-align:left;
+  color:var(--chalk-dim);
+  font-size:12px;
+  line-height:1.6;
+}
+
+.payment-instructions strong{
+  display:block;
+  margin-bottom:3px;
+  color:#8fe0a8;
+}
+
+.btn-whatsapp{
+  background:#25D366;
+  color:#062d15;
+  border:1px solid #25D366;
+  font-weight:800;
+}
+
+.btn-whatsapp:hover{
+  background:#21c45e;
+  border-color:#21c45e;
+  color:#052913;
+}
+
+.form-error{
+  display:none;
+  margin:0 0 14px;
+  padding:13px 14px;
+  border-radius:10px;
+  color:#ffaba4;
+  background:rgba(183,52,46,.12);
+  border:1px solid rgba(183,52,46,.35);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.form-error.show{
+  display:block;
+}
+
+@media(max-width:600px){
+
+  .register-direct{
+    padding-top:30px;
+  }
+
+  .register-heading{
+    margin-bottom:24px;
+  }
+
+  .form-card{
+    padding:24px 18px;
+  }
+
+  .manual-payment-card{
+    padding:20px 14px;
+    margin-left:-2px;
+    margin-right:-2px;
+  }
+
+  .payment-breakdown{
+    grid-template-columns:1fr;
+  }
+
+  .payment-breakdown div{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .payment-breakdown strong{
+    margin-top:0;
+  }
+
+  .payment-upi-id{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .payment-upi-id .copy-btn{
+    width:100%;
+  }
+
+  .upi-app-btn{
+    width:100%;
+    justify-content:center;
+  }
+}
