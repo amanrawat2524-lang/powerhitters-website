@@ -1,7 +1,7 @@
 /* Power Hitters — Manual UPI registration */
 
 .register-direct{
-  padding-top:48px;
+  padding-top:18px;
 }
 
 .register-heading{
@@ -178,7 +178,7 @@
 @media(max-width:600px){
 
   .register-direct{
-    padding-top:30px;
+    padding-top:10px;
   }
 
   .register-heading{

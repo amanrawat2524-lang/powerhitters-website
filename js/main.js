@@ -11,6 +11,35 @@ if (window.supabase) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  // Global Season 3 UI cleanup:
+  // Remove the top-right registration-open pill across the site.
+  document.querySelectorAll('.navcta .live-pill').forEach(function (pill) {
+    var label = (pill.textContent || '').toUpperCase();
+    if (label.indexOf('REGISTRATIONS OPEN') !== -1) {
+      pill.remove();
+    }
+  });
+
+  // Normalize old public Season 3 entry-fee text everywhere this shared JS loads.
+  if (document.body && window.NodeFilter) {
+    var priceWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var priceNode;
+
+    while ((priceNode = priceWalker.nextNode())) {
+      var originalPriceText = priceNode.nodeValue || '';
+      var updatedPriceText = originalPriceText
+        .replace(/₹2,499/g, '₹1,999')
+        .replace(/₹2,500/g, '₹1,999')
+        .replace(/2,499\s*\/\s*team/g, '1,999 / team')
+        .replace(/2,500\s*\/\s*team/g, '1,999 / team');
+
+      if (updatedPriceText !== originalPriceText) {
+        priceNode.nodeValue = updatedPriceText;
+      }
+    }
+  }
+
+
   // Mobile nav
   var burger = document.querySelector('.burger');
   var navlinks = document.querySelector('.navlinks');
@@ -114,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       submitBtn.textContent = registrationSaved
         ? 'Open WhatsApp Again'
-        : 'I’ve Paid ₹500 — Submit & Send on WhatsApp';
+        : 'I’ve Paid ₹499 — Submit & Send on WhatsApp';
     }
 
     function buildWhatsAppMessage(data, registrationId) {
@@ -137,11 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       lines.push(
         '',
-        'Entry Fee: ₹2,499',
-        'Advance Paid: ₹500',
-        'Remaining: ₹1,999',
+        'Entry Fee: ₹1,999',
+        'Advance Paid: ₹499',
+        'Remaining: ₹1,500',
         '',
-        'I have completed the ₹500 advance payment.',
+        'I have completed the ₹499 advance payment.',
         'I am attaching the payment screenshot in this WhatsApp chat for verification.'
       );
 

@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (newStatus === 'paid') {
 
             var confirmed = window.confirm(
-              'Have you verified this team’s ₹500 UPI payment screenshot / bank payment?'
+              'Have you verified this team’s ₹499 UPI payment screenshot / bank payment?'
             );
 
             if (!confirmed) return;
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var historicRemaining =
           Math.max(
-            2499 - historicPaidAmount,
+            1999 - historicPaidAmount,
             0
           );
 
@@ -399,16 +399,16 @@ document.addEventListener('DOMContentLoaded', function () {
       } else if (isPaid) {
 
         advanceCell.innerHTML =
-          '<strong style="color:#8fe0a8;">₹500 Paid ✓</strong>' +
+          '<strong style="color:#8fe0a8;">₹499 Paid ✓</strong>' +
           '<br>' +
-          '<span style="font-size:11px;">₹1,999 Remaining</span>';
+          '<span style="font-size:11px;">₹1,500 Remaining</span>';
 
       } else {
 
         advanceCell.innerHTML =
-          '<strong>₹500 Pending</strong>' +
+          '<strong>₹499 Pending</strong>' +
           '<br>' +
-          '<span style="font-size:11px;">₹1,999 remaining after advance</span>';
+          '<span style="font-size:11px;">₹1,500 remaining after advance</span>';
       }
 
 
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
         verifyCell.innerHTML =
           '<div class="verify-details">' +
           '<strong>Check WhatsApp screenshot</strong><br>' +
-          'Verify the ₹500 UPI payment before using “Mark Paid”.' +
+          'Verify the ₹499 UPI payment before using “Mark Paid”.' +
           '</div>';
       }
 
