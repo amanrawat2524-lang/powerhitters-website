@@ -1,0 +1,117 @@
+/* PowerHitters — About Us */
+
+.about-page{min-height:70vh;}
+.about-intro{padding:72px 0 44px;}
+.about-intro-inner{max-width:820px;}
+.about-intro h1{margin-top:12px;max-width:760px;}
+.about-intro p{max-width:760px;margin-top:18px;color:var(--chalk-dim);font-size:16px;line-height:1.75;}
+.about-founders{padding:18px 0 84px;}
+.founders-heading{margin-bottom:30px;}
+.founders-heading h2{margin-top:10px;}
+
+.founders-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  align-items:stretch;
+}
+
+.founder-card{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--turf-mid);
+}
+
+.founder-photo-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:var(--ink);
+}
+
+.founder-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.founder-photo-placeholder{
+  display:none;
+  width:100%;
+  height:100%;
+  align-items:center;
+  justify-content:center;
+  font-family:'Anton',sans-serif;
+  font-size:72px;
+  color:var(--floodlight);
+  background:radial-gradient(circle at 50% 30%,rgba(255,201,60,.09),transparent 34%),var(--ink);
+}
+
+.founder-content{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  padding:22px 20px 24px;
+  text-align:center;
+}
+
+.founder-content h3{
+  margin:0;
+  color:var(--chalk);
+  font-family:'Anton',sans-serif;
+  font-size:28px;
+  font-weight:400;
+  line-height:1.1;
+  text-transform:uppercase;
+}
+
+.founder-title{
+  margin-top:8px;
+  color:var(--floodlight);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.founder-responsibilities{
+  margin-top:16px;
+  color:var(--chalk-dim);
+  font-size:13px;
+  font-weight:600;
+  line-height:1.65;
+}
+
+.founder-responsibilities span{margin:0 5px;color:var(--floodlight);}
+
+.about-closing{
+  max-width:820px;
+  margin:46px auto 0;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+  color:var(--chalk);
+  font-size:18px;
+  font-weight:700;
+  line-height:1.5;
+  text-align:center;
+}
+
+@media(max-width:700px){
+  .about-intro{padding:42px 0 30px;}
+  .about-intro p{font-size:14px;line-height:1.7;}
+  .about-founders{padding:8px 0 62px;}
+  .founders-grid{grid-template-columns:1fr;gap:18px;}
+  .founder-photo-wrap{aspect-ratio:4/3;}
+  .founder-photo-placeholder{font-size:62px;}
+  .founder-content{padding:20px 18px 22px;}
+  .founder-content h3{font-size:26px;}
+  .about-closing{margin-top:34px;padding-top:24px;font-size:16px;}
+}

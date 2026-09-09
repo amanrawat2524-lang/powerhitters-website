@@ -1,0 +1,28 @@
+POWERHITTERS — ABOUT PAGE NAVIGATION UPDATE
+
+NEW FILES
+about.html
+css/about.css
+
+Add this link to the existing main navigation on each public page:
+
+<a href="about.html">ABOUT</a>
+
+Recommended position:
+<a href="gallery.html">Gallery</a>
+<a href="champions.html">Champions</a>
+<a href="about.html">ABOUT</a>
+<a href="register.html">Register</a>
+
+PHOTO FILES TO PROVIDE
+Create:
+images/founders/
+
+Then upload these exact files:
+images/founders/aman-rawat.jpg
+images/founders/rasheed.jpg
+images/founders/arun.jpg
+
+Recommended: square or near-square portraits, similar crop/framing, at least 800×800 px.
+
+Until the photos are uploaded, the page automatically shows initials placeholders.
