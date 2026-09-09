@@ -1,208 +1,196 @@
-/*
-  PowerHitters About Us page
-  Intentionally reuses the site's existing typography, nav, footer,
-  .wrap, .display, .eyebrow, .accent and button styles.
-*/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.about-page {
-  background: #f4efdf;
-  color: #10281f;
-}
+  <title>About Us — PowerHitters</title>
+  <meta name="description" content="Meet the co-founders behind PowerHitters.">
+  <link rel="canonical" href="https://powerhitters.co.in/about.html">
 
-.about-intro {
-  padding: 64px 0 42px;
-  border-bottom: 1px solid rgba(16, 40, 31, 0.12);
-}
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg">
 
-.about-title {
-  max-width: 800px;
-  margin: 12px 0 0;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-.about-intro-copy {
-  max-width: 880px;
-  margin: 18px 0 0;
-  font-family: "Work Sans", sans-serif;
-  font-size: 17px;
-  line-height: 1.7;
-  color: #263b33;
-}
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/about.css">
+</head>
 
-.about-team {
-  padding: 52px 0 72px;
-}
+<body>
 
-.team-heading {
-  margin-bottom: 28px;
-}
+<nav>
+  <div class="wrap">
 
-.team-heading h2 {
-  margin: 10px 0 0;
-}
+    <a class="logo" href="index.html">
+      <span class="logo-badge">
+        <img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo">
+      </span>
+    </a>
 
-.founders-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  align-items: stretch;
-}
+    <button class="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
 
-.founder-card {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid rgba(16, 40, 31, 0.18);
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 8px 22px rgba(16, 40, 31, 0.06);
-}
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="champions.html">Champions</a>
+      <a href="about.html" class="active">About</a>
+      <a href="register.html">Register</a>
+    </div>
 
-.founder-photo-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #123126;
-  border-bottom: 1px solid rgba(16, 40, 31, 0.14);
-}
+    <div class="navcta">
+      <a class="btn btn-primary"
+         href="https://instagram.com/powerhitters.turf"
+         target="_blank"
+         rel="noopener">Follow for Updates</a>
+    </div>
 
-.founder-photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
+  </div>
+</nav>
 
-.founder-placeholder {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  font-family: "Anton", sans-serif;
-  font-size: clamp(52px, 5vw, 72px);
-  line-height: 1;
-  color: #ffc733;
-  background:
-    linear-gradient(135deg, rgba(255, 199, 51, 0.06), transparent 55%),
-    #123126;
-}
 
-.founder-info {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 22px;
-}
+<main class="about-page">
 
-.founder-info h3 {
-  margin: 0;
-  font-family: "Anton", sans-serif;
-  font-size: 28px;
-  line-height: 1.08;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: #10281f;
-}
+  <section class="about-intro">
+    <div class="wrap">
 
-.founder-role {
-  margin-top: 8px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  line-height: 1.4;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #c6332f;
-}
+      <div class="eyebrow">ABOUT POWERHITTERS</div>
 
-.founder-info p {
-  margin: 18px 0 0;
-  font-family: "Work Sans", sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  font-weight: 600;
-  color: #354a42;
-}
+      <h1 class="display about-title">
+        THE PEOPLE BEHIND
+        <span class="accent">POWERHITTERS.</span>
+      </h1>
 
-.founder-info p span {
-  padding: 0 4px;
-  color: #d49b00;
-}
+      <p class="about-intro-copy">
+        PowerHitters is built by a team passionate about creating better turf cricket experiences, growing the local cricket community and delivering professionally managed tournaments.
+      </p>
 
-.about-closing {
-  max-width: 900px;
-  margin: 42px auto 0;
-  padding-top: 28px;
-  border-top: 1px solid rgba(16, 40, 31, 0.18);
-  font-family: "Work Sans", sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-  font-weight: 700;
-  text-align: center;
-  color: #10281f;
-}
+    </div>
+  </section>
 
-@media (max-width: 900px) {
-  .about-intro {
-    padding: 50px 0 34px;
-  }
 
-  .about-team {
-    padding: 42px 0 60px;
-  }
+  <section class="about-team">
+    <div class="wrap">
 
-  .founders-grid {
-    gap: 16px;
-  }
+      <div class="team-heading">
+        <div class="eyebrow">THE TEAM</div>
+        <h2 class="display">MEET THE CO-FOUNDERS</h2>
+      </div>
 
-  .founder-info {
-    padding: 18px;
-  }
 
-  .founder-info h3 {
-    font-size: 24px;
-  }
+      <div class="founders-grid">
 
-  .founder-info p {
-    font-size: 13px;
-  }
-}
+        <article class="founder-card">
 
-@media (max-width: 700px) {
-  .about-intro {
-    padding: 38px 0 28px;
-  }
+          <div class="founder-photo-frame">
+            <img
+              src="images/founders/aman-rawat.jpg"
+              alt="Aman Rawat"
+              class="founder-photo"
+              onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+            >
+            <div class="founder-placeholder" hidden>AR</div>
+          </div>
 
-  .about-intro-copy {
-    font-size: 15px;
-  }
+          <div class="founder-info">
+            <h3>Aman Rawat</h3>
+            <div class="founder-role">Co-Founder</div>
+            <p>Strategy <span>•</span> Partnerships <span>•</span> Operations</p>
+          </div>
 
-  .about-team {
-    padding: 34px 0 52px;
-  }
+        </article>
 
-  .founders-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
 
-  .founder-photo-frame {
-    aspect-ratio: 4 / 3;
-  }
+        <article class="founder-card">
 
-  .founder-info {
-    padding: 20px;
-  }
+          <div class="founder-photo-frame">
+            <img
+              src="images/founders/rasheed-malik.jpg"
+              alt="Rasheed Malik"
+              class="founder-photo"
+              onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+            >
+            <div class="founder-placeholder" hidden>RM</div>
+          </div>
 
-  .founder-info h3 {
-    font-size: 27px;
-  }
+          <div class="founder-info">
+            <h3>Rasheed Malik</h3>
+            <div class="founder-role">Co-Founder</div>
+            <p>Ground <span>•</span> Logistics <span>•</span> Event Management</p>
+          </div>
 
-  .about-closing {
-    margin-top: 34px;
-    padding-top: 24px;
-    font-size: 16px;
-  }
-}
+        </article>
+
+
+        <article class="founder-card">
+
+          <div class="founder-photo-frame">
+            <img
+              src="images/founders/arun-chauhan.jpg"
+              alt="Arun Chauhan"
+              class="founder-photo"
+              onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+            >
+            <div class="founder-placeholder" hidden>AC</div>
+          </div>
+
+          <div class="founder-info">
+            <h3>Arun Chauhan</h3>
+            <div class="founder-role">Co-Founder</div>
+            <p>Teams <span>•</span> Coordination <span>•</span> Tournament Operations</p>
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <p class="about-closing">
+        Together, we’re building PowerHitters one tournament at a time.
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="wrap">
+
+    <div class="foot-top">
+
+      <a class="logo" href="index.html">
+        <span class="logo-badge">
+          <img src="images/logo.jpg" width="36" height="36" alt="Power Hitters logo">
+        </span>
+      </a>
+
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="champions.html">Champions</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="https://instagram.com/powerhitters.turf" target="_blank" rel="noopener">Instagram</a>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 PowerHitters, Vasai West.</span>
+      <span>Made for teams who play to win.</span>
+    </div>
+
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

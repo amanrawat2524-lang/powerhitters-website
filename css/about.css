@@ -1,0 +1,208 @@
+/*
+  PowerHitters About Us page
+  Intentionally reuses the site's existing typography, nav, footer,
+  .wrap, .display, .eyebrow, .accent and button styles.
+*/
+
+.about-page {
+  background: #f4efdf;
+  color: #10281f;
+}
+
+.about-intro {
+  padding: 64px 0 42px;
+  border-bottom: 1px solid rgba(16, 40, 31, 0.12);
+}
+
+.about-title {
+  max-width: 800px;
+  margin: 12px 0 0;
+}
+
+.about-intro-copy {
+  max-width: 880px;
+  margin: 18px 0 0;
+  font-family: "Work Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #263b33;
+}
+
+.about-team {
+  padding: 52px 0 72px;
+}
+
+.team-heading {
+  margin-bottom: 28px;
+}
+
+.team-heading h2 {
+  margin: 10px 0 0;
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.founder-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(16, 40, 31, 0.18);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(16, 40, 31, 0.06);
+}
+
+.founder-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #123126;
+  border-bottom: 1px solid rgba(16, 40, 31, 0.14);
+}
+
+.founder-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.founder-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(52px, 5vw, 72px);
+  line-height: 1;
+  color: #ffc733;
+  background:
+    linear-gradient(135deg, rgba(255, 199, 51, 0.06), transparent 55%),
+    #123126;
+}
+
+.founder-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px;
+}
+
+.founder-info h3 {
+  margin: 0;
+  font-family: "Anton", sans-serif;
+  font-size: 28px;
+  line-height: 1.08;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #10281f;
+}
+
+.founder-role {
+  margin-top: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c6332f;
+}
+
+.founder-info p {
+  margin: 18px 0 0;
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 600;
+  color: #354a42;
+}
+
+.founder-info p span {
+  padding: 0 4px;
+  color: #d49b00;
+}
+
+.about-closing {
+  max-width: 900px;
+  margin: 42px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid rgba(16, 40, 31, 0.18);
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 700;
+  text-align: center;
+  color: #10281f;
+}
+
+@media (max-width: 900px) {
+  .about-intro {
+    padding: 50px 0 34px;
+  }
+
+  .about-team {
+    padding: 42px 0 60px;
+  }
+
+  .founders-grid {
+    gap: 16px;
+  }
+
+  .founder-info {
+    padding: 18px;
+  }
+
+  .founder-info h3 {
+    font-size: 24px;
+  }
+
+  .founder-info p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-intro {
+    padding: 38px 0 28px;
+  }
+
+  .about-intro-copy {
+    font-size: 15px;
+  }
+
+  .about-team {
+    padding: 34px 0 52px;
+  }
+
+  .founders-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .founder-photo-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .founder-info {
+    padding: 20px;
+  }
+
+  .founder-info h3 {
+    font-size: 27px;
+  }
+
+  .about-closing {
+    margin-top: 34px;
+    padding-top: 24px;
+    font-size: 16px;
+  }
+}
