@@ -24,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/live-score.css">
 
 <style>
 /* =========================
@@ -255,6 +256,39 @@
   </div>
 
 </header>
+   <section class="section tight" id="powerhittersLiveScore">
+  <div class="wrap">
+    <div class="ph-live-score">
+      <div class="ph-live-inner">
+
+        <div class="ph-live-head">
+          <div class="ph-live-pill">
+            <span class="ph-live-dot"></span>
+            <span id="phLiveStatus">LIVE</span>
+          </div>
+          <div class="ph-live-innings" id="phLiveInnings">1st Innings</div>
+        </div>
+
+        <div class="ph-live-team" id="phLiveBatting">Team A</div>
+
+        <div class="ph-live-scoreline">
+          <span id="phLiveRuns">0</span>/<span id="phLiveWickets">0</span>
+        </div>
+
+        <div class="ph-live-sub">
+          <span><strong id="phLiveOvers">0.0</strong> overs</span>
+          <span>vs <strong id="phLiveBowling">Team B</strong></span>
+          <span id="phLiveTargetWrap" hidden>
+            Target <strong id="phLiveTarget">—</strong>
+          </span>
+        </div>
+
+        <div class="ph-live-chase" id="phLiveChase" hidden></div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <section class="section">
@@ -760,6 +794,7 @@
 
 
 <script src="js/main.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/live-score.js"></script>
 </body>
 </html>
