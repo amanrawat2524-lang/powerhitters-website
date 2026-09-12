@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Scorer — Power Hitters Admin</title><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="images/logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/live-score.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="turf-bg-solid">
+<nav><div class="wrap"><a class="logo" href="index.html"><span class="logo-badge"><img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo"></span></a><div class="navcta"><a class="btn btn-ghost" href="admin.html">Registrations</a><button id="logoutBtn" class="btn btn-ghost">Log Out</button></div></div></nav>
+<main class="scorer-shell">
+<section id="authGate" class="scorer-card centered"><div class="scorer-kicker">ADMIN ONLY</div><h1>Checking login…</h1><p>You must be logged in through the PowerHitters admin panel.</p><a href="admin.html" class="btn btn-primary">Go to Admin Login</a></section>
+<section id="setupCard" class="scorer-card" hidden><div class="scorer-kicker">NEW MATCH</div><h1 class="display">MATCH SETUP</h1><div class="setup-grid"><label><span>Team A</span><input id="teamA" type="text" placeholder="e.g. Youngster Boys"></label><label><span>Team B</span><input id="teamB" type="text" placeholder="e.g. Real Warriors"></label><label><span>Overs</span><input id="oversLimit" type="number" min="1" max="50" value="4"></label><label><span>Batting First</span><select id="battingFirst"><option value="A">Team A</option><option value="B">Team B</option></select></label></div><button id="startMatchBtn" class="btn btn-primary btn-block">Start Match</button></section>
+<section id="scorerCard" class="scorer-card" hidden><div class="score-topline"><div><div class="scorer-kicker" id="matchStatus">LIVE</div><div class="innings-label" id="inningsLabel">1st Innings</div></div><button id="newMatchBtn" class="mini-btn danger-outline">New Match</button></div><div class="match-teams"><div class="batting-name" id="battingName">Team A</div><div class="versus">vs <span id="bowlingName">Team B</span></div></div><div class="big-score"><span id="runs">0</span><span class="slash">/</span><span id="wickets">0</span></div><div class="score-meta"><span><strong id="oversText">0.0</strong> overs</span><span id="targetWrap" hidden>Target <strong id="targetText">—</strong></span><span>Limit <strong id="limitText">4</strong> overs</span></div><div id="chaseInfo" class="chase-info" hidden></div><div id="saveState" class="save-state">Ready</div>
+<div class="run-grid"><button class="score-btn dot" data-action="dot">0</button><button class="score-btn" data-runs="1">+1</button><button class="score-btn" data-runs="2">+2</button><button class="score-btn" data-runs="3">+3</button><button class="score-btn boundary" data-runs="4">+4</button><button class="score-btn boundary" data-runs="6">+6</button></div><div class="extra-grid"><button id="wicketBtn" class="action-btn wicket">WICKET</button><button id="wideBtn" class="action-btn">WIDE +1</button><button id="noBallBtn" class="action-btn">NO BALL +1</button></div><div class="utility-grid"><button id="undoBtn" class="utility-btn">↶ UNDO LAST</button><button id="inningsBtn" class="utility-btn primary">END 1ST INNINGS</button><button id="finishBtn" class="utility-btn">FINISH MATCH</button></div><p class="scorer-note">Run buttons count one legal ball. Wide/No Ball add 1 run but do not count a legal ball. Undo restores the exact previous score.</p></section>
+</main><script src="js/scorer.js"></script></body></html>
