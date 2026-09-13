@@ -1,1 +1,78 @@
-document.addEventListener('DOMContentLoaded',function(){var root=document.getElementById('powerhittersLiveScore');if(!root||!window.supabase)return;var c=window.supabase.createClient('https://icebgysininolvjbueet.supabase.co','sb_publishable_h654diItHmAibeSCRd1y6w_iyLyPB-4');function ov(b){return Math.floor((b||0)/6)+'.'+((b||0)%6)}function render(m){if(!m||!m.team_a||m.status==='not_started'){root.classList.add('ph-live-hidden');return}root.classList.remove('ph-live-hidden');document.getElementById('phLiveStatus').textContent=m.status==='finished'?'FINAL':'LIVE';document.getElementById('phLiveInnings').textContent=m.innings===2?'2nd Innings':'1st Innings';document.getElementById('phLiveBatting').textContent=m.batting_team||'—';document.getElementById('phLiveBowling').textContent=m.bowling_team||'—';document.getElementById('phLiveRuns').textContent=m.runs||0;document.getElementById('phLiveWickets').textContent=m.wickets||0;document.getElementById('phLiveOvers').textContent=ov(m.legal_balls);var t=document.getElementById('phLiveTargetWrap');t.hidden=!(m.innings===2&&m.target);if(!t.hidden)document.getElementById('phLiveTarget').textContent=m.target;var ch=document.getElementById('phLiveChase');if(m.status==='finished'){ch.textContent=m.winner?m.winner+' won the match':'Match finished';ch.hidden=false}else if(m.innings===2&&m.target){var n=Math.max(0,m.target-m.runs),l=Math.max(0,m.overs_limit*6-m.legal_balls);ch.textContent=n<=0?m.batting_team+' won the chase':'Need '+n+' run'+(n===1?'':'s')+' from '+l+' ball'+(l===1?'':'s');ch.hidden=false}else ch.hidden=true}c.from('live_match').select('*').eq('id',1).maybeSingle().then(r=>{if(!r.error)render(r.data)});c.channel('powerhitters-live-score').on('postgres_changes',{event:'*',schema:'public',table:'live_match',filter:'id=eq.1'},p=>render(p.new)).subscribe();});
+document.addEventListener('DOMContentLoaded', function () {
+
+  const SUPABASE_URL = 'https://icebgysininolvjbueet.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_h654diItHmAibeSCRd1y6w_iyLyPB-4';
+
+  if (!window.supabase) return;
+
+  const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const banner = document.getElementById('liveMatchBanner');
+  const bannerText = document.getElementById('liveBannerText');
+
+  function updateBanner(match) {
+
+    if (!banner || !bannerText) return;
+
+    if (!match || match.status !== 'live') {
+      banner.hidden = true;
+      return;
+    }
+
+    banner.hidden = false;
+
+    const battingTeam = match.batting_team || 'Team';
+    const bowlingTeam = match.bowling_team || 'Team';
+    const runs = match.runs || 0;
+    const wickets = match.wickets || 0;
+
+    bannerText.textContent =
+      'LIVE NOW — ' +
+      battingTeam +
+      ' ' +
+      runs +
+      '/' +
+      wickets +
+      ' vs ' +
+      bowlingTeam +
+      ' — VIEW MATCH';
+  }
+
+  async function loadLiveMatch() {
+
+    const { data, error } = await client
+      .from('live_match')
+      .select('*')
+      .eq('id', 1)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Live score error:', error);
+      return;
+    }
+
+    updateBanner(data);
+  }
+
+  loadLiveMatch();
+
+  client
+    .channel('powerhitters-live-banner')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'live_match',
+        filter: 'id=eq.1'
+      },
+      function (payload) {
+        updateBanner(payload.new);
+      }
+    )
+    .subscribe();
+
+});
