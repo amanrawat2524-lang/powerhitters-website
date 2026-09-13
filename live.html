@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Live Match — Power Hitters</title>
+
+<link rel="icon" href="images/logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/live-score.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<nav>
+  <div class="wrap">
+
+    <a class="logo" href="index.html">
+      <span class="logo-badge">
+        <img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo">
+      </span>
+    </a>
+
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="champions.html">Champions</a>
+      <a href="about.html">About</a>
+      <a href="live.html" class="active">Live</a>
+      <a href="register.html">Register</a>
+    </div>
+
+    <div class="navcta">
+      <a class="btn btn-primary"
+         href="https://instagram.com/powerhitters.turf"
+         target="_blank">
+        Follow for Updates
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<header class="page-hero turf-bg">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="over-dots">
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span class="hit"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      POWERHITTERS LIVE
+    </div>
+
+    <h1 class="display">
+      LIVE MATCH<br>
+      <span class="accent">SCORE.</span>
+    </h1>
+
+    <p class="lede">
+      Follow the current PowerHitters match live.
+    </p>
+  </div>
+</header>
+
+
+<section class="section">
+
+  <div class="wrap">
+
+    <div id="liveMatchPageCard" class="ph-live-score">
+
+      <div class="ph-live-inner">
+
+        <div class="ph-live-head">
+
+          <div class="ph-live-pill">
+            <span class="ph-live-dot"></span>
+            <span id="pageLiveStatus">LIVE</span>
+          </div>
+
+          <div class="ph-live-innings" id="pageInnings">
+            1st Innings
+          </div>
+
+        </div>
+
+
+        <div class="ph-live-team" id="pageBattingTeam">
+          Loading...
+        </div>
+
+
+        <div class="ph-live-scoreline">
+          <span id="pageRuns">0</span>/<span id="pageWickets">0</span>
+        </div>
+
+
+        <div class="ph-live-sub">
+
+          <span>
+            <strong id="pageOvers">0.0</strong> overs
+          </span>
+
+          <span>
+            vs <strong id="pageBowlingTeam">—</strong>
+          </span>
+
+          <span id="pageTargetWrap" hidden>
+            Target <strong id="pageTarget">—</strong>
+          </span>
+
+        </div>
+
+
+        <div class="ph-live-chase" id="pageChaseText" hidden></div>
+
+      </div>
+
+    </div>
+
+
+    <div id="noLiveMatch" style="display:none; text-align:center; padding:50px 20px;">
+
+      <div class="sec-eyebrow">
+        NO MATCH LIVE
+      </div>
+
+      <h2 class="display">
+        No match is<br>
+        <span class="accent">live right now.</span>
+      </h2>
+
+      <p>
+        Check back during tournament hours for live scores.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  <div class="wrap">
+
+    <div class="foot-top">
+
+      <a class="logo" href="index.html">
+        <span class="logo-badge">
+          <img src="images/logo.jpg" width="36" height="36" alt="Power Hitters logo">
+        </span>
+      </a>
+
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="champions.html">Champions</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Power Hitters, Vasai West.</span>
+      <span>Made for teams who play to win.</span>
+    </div>
+
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const SUPABASE_URL = 'https://icebgysininolvjbueet.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_h654diItHmAibeSCRd1y6w_iyLyPB-4';
+
+  const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const liveCard = document.getElementById('liveMatchPageCard');
+  const noLive = document.getElementById('noLiveMatch');
+
+  function oversFromBalls(balls) {
+    balls = balls || 0;
+    return Math.floor(balls / 6) + '.' + (balls % 6);
+  }
+
+  function renderMatch(match) {
+
+    if (!match || match.status === 'not_started') {
+      liveCard.style.display = 'none';
+      noLive.style.display = 'block';
+      return;
+    }
+
+    liveCard.style.display = 'block';
+    noLive.style.display = 'none';
+
+    document.getElementById('pageLiveStatus').textContent =
+      match.status === 'finished' ? 'FINAL' : 'LIVE';
+
+    document.getElementById('pageInnings').textContent =
+      match.innings === 2 ? '2nd Innings' : '1st Innings';
+
+    document.getElementById('pageBattingTeam').textContent =
+      match.batting_team || 'Team';
+
+    document.getElementById('pageBowlingTeam').textContent =
+      match.bowling_team || 'Team';
+
+    document.getElementById('pageRuns').textContent =
+      match.runs || 0;
+
+    document.getElementById('pageWickets').textContent =
+      match.wickets || 0;
+
+    document.getElementById('pageOvers').textContent =
+      oversFromBalls(match.legal_balls);
+
+
+    const targetWrap =
+      document.getElementById('pageTargetWrap');
+
+    const chaseText =
+      document.getElementById('pageChaseText');
+
+
+    if (match.innings === 2 && match.target) {
+
+      targetWrap.hidden = false;
+
+      document.getElementById('pageTarget').textContent =
+        match.target;
+
+      const runsNeeded =
+        Math.max(0, match.target - match.runs);
+
+      const totalBalls =
+        (match.overs_limit || 4) * 6;
+
+      const ballsLeft =
+        Math.max(0, totalBalls - match.legal_balls);
+
+
+      if (match.status === 'finished') {
+
+        chaseText.hidden = false;
+
+        chaseText.textContent =
+          match.winner
+            ? match.winner + ' won the match'
+            : 'Match finished';
+
+      }
+      else {
+
+        chaseText.hidden = false;
+
+        chaseText.textContent =
+          'Need ' +
+          runsNeeded +
+          ' runs from ' +
+          ballsLeft +
+          ' balls';
+
+      }
+
+    }
+    else {
+
+      targetWrap.hidden = true;
+      chaseText.hidden = true;
+
+    }
+
+  }
+
+
+  async function loadMatch() {
+
+    const { data, error } =
+      await client
+        .from('live_match')
+        .select('*')
+        .eq('id', 1)
+        .maybeSingle();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    renderMatch(data);
+
+  }
+
+
+  loadMatch();
+
+
+  client
+    .channel('powerhitters-live-page')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'live_match',
+        filter: 'id=eq.1'
+      },
+      function (payload) {
+
+        renderMatch(payload.new);
+
+      }
+    )
+    .subscribe();
+
+});
+</script>
+
+</body>
+</html>
