@@ -605,3 +605,9 @@ nav a:hover {
     transition-duration: 0.01ms !important;
   }
 }
+/* Disable clicking the current active nav page */
+.nav a.active,
+nav a.active {
+  pointer-events: none;
+  cursor: default;
+}
