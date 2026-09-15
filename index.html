@@ -129,6 +129,277 @@
     max-height: 80px;
   }
 }
+   /* =========================
+   SEASON 3 RULE BOOK SLIDER
+========================= */
+
+.rulebook-section {
+  overflow: hidden;
+}
+
+.rulebook-head {
+  margin-bottom: 38px;
+}
+
+.rulebook-slider {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  gap: 18px;
+  align-items: center;
+}
+
+.rulebook-viewport {
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.rulebook-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.rulebook-slide {
+  min-width: 100%;
+  background:
+    linear-gradient(135deg, rgba(255,201,60,0.06), transparent 34%),
+    var(--turf-mid);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 42px;
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rulebook-label {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid rgba(255,201,60,0.42);
+  color: var(--floodlight);
+  border-radius: 7px;
+  padding: 6px 11px;
+  margin-bottom: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.rulebook-slide h3 {
+  color: var(--chalk);
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1;
+  margin-bottom: 30px;
+}
+
+.rulebook-copy {
+  color: var(--chalk-dim);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 700px;
+  margin-top: 26px;
+}
+
+.rulebook-stats,
+.rulebook-money,
+.rulebook-prizes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rulebook-stat,
+.rulebook-money > div,
+.rulebook-prizes > div {
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.rulebook-stat strong {
+  display: block;
+  color: var(--floodlight);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.rulebook-stat span,
+.rulebook-money span,
+.rulebook-prizes span,
+.rulebook-info span {
+  color: var(--chalk-dim);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rulebook-money strong,
+.rulebook-prizes strong {
+  display: block;
+  color: var(--chalk);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 30px;
+  margin-top: 8px;
+}
+
+.rulebook-prizes .winner {
+  border-color: rgba(255,201,60,0.5);
+  background: rgba(255,201,60,0.08);
+}
+
+.rulebook-prizes .winner strong {
+  color: var(--floodlight);
+}
+
+.rulebook-list {
+  display: grid;
+  gap: 15px;
+  max-width: 760px;
+}
+
+.rulebook-list li {
+  color: var(--chalk);
+  background: rgba(243,239,224,0.05);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.rulebook-info {
+  display: grid;
+  gap: 14px;
+}
+
+.rulebook-info > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 17px 20px;
+}
+
+.rulebook-info strong {
+  color: var(--chalk);
+  text-align: right;
+  font-size: 15px;
+}
+
+.rulebook-arrow {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--turf-mid);
+  color: var(--chalk);
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.rulebook-arrow:hover {
+  border-color: var(--floodlight);
+  background: var(--ink);
+}
+
+.rulebook-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+  padding: 0 70px;
+}
+
+.rulebook-counter {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--chalk-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+#rulebookCurrent {
+  color: var(--floodlight);
+}
+
+.rulebook-counter-line {
+  width: 34px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.rulebook-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.rulebook-dots button {
+  width: 7px;
+  height: 7px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(243,239,224,0.24);
+  cursor: pointer;
+}
+
+.rulebook-dots button.active {
+  width: 24px;
+  border-radius: 99px;
+  background: var(--floodlight);
+}
+
+@media (max-width: 760px) {
+
+  .rulebook-slider {
+    grid-template-columns: 1fr;
+    position: relative;
+    padding-bottom: 60px;
+  }
+
+  .rulebook-slide {
+    padding: 28px 22px;
+  }
+
+  .rulebook-stats,
+  .rulebook-money,
+  .rulebook-prizes {
+    grid-template-columns: 1fr;
+  }
+
+  .rulebook-prev {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .rulebook-next {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .rulebook-footer {
+    padding: 0;
+  }
+
+  .rulebook-info > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .rulebook-info strong {
+    text-align: left;
+  }
+}
 </style>
 </head>
 
@@ -353,101 +624,224 @@
 </section>
 
 
-<section class="section dark">
+<section class="section dark rulebook-section">
 
   <div class="wrap">
 
     <div class="over-break">
-      <span class="label">FORMAT</span>
+      <span class="label">RULE BOOK</span>
       <div class="line"></div>
     </div>
 
-
-    <div class="sec-head">
+    <div class="sec-head rulebook-head">
 
       <div>
 
-        <div class="sec-eyebrow">How It Works</div>
+        <div class="sec-eyebrow">PowerHitters Season 3</div>
 
         <div class="sec-title display">
-          Three overs to<br>
-          know before <span class="accent">you play.</span>
+          Everything before<br>
+          <span class="accent">you play.</span>
         </div>
 
       </div>
+
+      <p class="sec-sub">
+        Match format, entry, prize pool, rules and tournament information —
+        all in one place.
+      </p>
 
     </div>
 
+    <div class="rulebook-slider">
 
-    <div class="over-grid">
+      <button class="rulebook-arrow rulebook-prev" type="button" aria-label="Previous slide">
+        ←
+      </button>
 
-      <div class="over-card on-dark">
+      <div class="rulebook-viewport">
 
-        <span class="over-tag">OVER 1</span>
+        <div class="rulebook-track">
 
-        <h3>Team Composition</h3>
+          <article class="rulebook-slide">
 
-        <p>
-          9 players per team, one captain, one vice-captain.
-          All players must be registered before the tournament begins.
-        </p>
+            <span class="rulebook-label">01 / FORMAT</span>
 
-        <div class="over-dots">
-          <span class="hit"></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+            <h3 class="display">Match Format</h3>
+
+            <div class="rulebook-stats">
+
+              <div class="rulebook-stat">
+                <strong>32</strong>
+                <span>Teams</span>
+              </div>
+
+              <div class="rulebook-stat">
+                <strong>4</strong>
+                <span>Overs / Match</span>
+              </div>
+
+              <div class="rulebook-stat">
+                <strong>9</strong>
+                <span>Players / Team</span>
+              </div>
+
+            </div>
+
+            <p class="rulebook-copy">
+              Underarm turf cricket played with a tennis ball.
+              Fast-paced matches built for competitive local cricket.
+            </p>
+
+          </article>
+
+          <article class="rulebook-slide">
+
+            <span class="rulebook-label">02 / ENTRY & PAYMENT</span>
+
+            <h3 class="display">Team Registration</h3>
+
+            <div class="rulebook-money">
+
+              <div>
+                <span>Entry Fee</span>
+                <strong>₹1,999</strong>
+              </div>
+
+              <div>
+                <span>Advance</span>
+                <strong>₹499</strong>
+              </div>
+
+              <div>
+                <span>Remaining</span>
+                <strong>₹1,500</strong>
+              </div>
+
+            </div>
+
+            <p class="rulebook-copy">
+              ₹499 advance confirms the team slot.
+              Remaining ₹1,500 is payable on match day.
+            </p>
+
+          </article>
+
+          <article class="rulebook-slide">
+
+            <span class="rulebook-label">03 / PRIZE POOL</span>
+
+            <h3 class="display">₹40,000 Total Prize Pool</h3>
+
+            <div class="rulebook-prizes">
+
+              <div class="winner">
+                <span>Winner</span>
+                <strong>₹25,000</strong>
+              </div>
+
+              <div>
+                <span>Runner-up</span>
+                <strong>₹10,000</strong>
+              </div>
+
+              <div>
+                <span>3rd Place</span>
+                <strong>₹5,000</strong>
+              </div>
+
+            </div>
+
+            <p class="rulebook-copy">
+              The top three teams take home the prize money.
+              No prize split.
+            </p>
+
+          </article>
+
+          <article class="rulebook-slide">
+
+            <span class="rulebook-label">04 / MATCH RULES</span>
+
+            <h3 class="display">Rules & Fair Play</h3>
+
+            <ul class="rulebook-list">
+              <li>No-ball and wide rules are applicable.</li>
+              <li>Umpire decisions are final.</li>
+              <li>Misconduct or arguments with officials may lead to disciplinary action.</li>
+              <li>All teams must follow tournament rules throughout the match.</li>
+            </ul>
+
+          </article>
+
+          <article class="rulebook-slide">
+
+            <span class="rulebook-label">05 / TOURNAMENT INFO</span>
+
+            <h3 class="display">Season 3 Details</h3>
+
+            <div class="rulebook-info">
+
+              <div>
+                <span>Date</span>
+                <strong>26–27 September 2026</strong>
+              </div>
+
+              <div>
+                <span>Venue</span>
+                <strong>Dropouts Turf, Vasai West</strong>
+              </div>
+
+              <div>
+                <span>Teams</span>
+                <strong>32 Teams</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+          <article class="rulebook-slide">
+
+            <span class="rulebook-label">06 / IMPORTANT NOTES</span>
+
+            <h3 class="display">Before You Play</h3>
+
+            <ul class="rulebook-list">
+              <li>All players must be registered.</li>
+              <li>The captain is responsible for team coordination.</li>
+              <li>Reporting time must be followed.</li>
+              <li>No prize split.</li>
+              <li>Organizer decisions are final for tournament operations.</li>
+            </ul>
+
+          </article>
+
         </div>
 
       </div>
 
+      <button class="rulebook-arrow rulebook-next" type="button" aria-label="Next slide">
+        →
+      </button>
 
-      <div class="over-card on-dark">
+    </div>
 
-        <span class="over-tag">OVER 2</span>
+    <div class="rulebook-footer">
 
-        <h3>Match Format</h3>
-
-        <p>
-          4-over matches, tennis ball, underarm bowling.
-          Fast-paced, high-scoring cricket built for turf.
-          Bracket details are shared before the tournament kicks off.
-        </p>
-
-        <div class="over-dots">
-          <span class="hit"></span>
-          <span class="hit"></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
+      <div class="rulebook-counter">
+        <span id="rulebookCurrent">01</span>
+        <span class="rulebook-counter-line"></span>
+        <span>06</span>
       </div>
 
-
-      <div class="over-card on-dark">
-
-        <span class="over-tag">OVER 3</span>
-
-        <h3>Rules &amp; Fair Play</h3>
-
-        <p>
-          No-balls, wides and LBW apply per standard turf rules.
-          Umpire decisions are final &mdash; misconduct means immediate disqualification.
-        </p>
-
-        <div class="over-dots">
-          <span class="hit"></span>
-          <span class="hit"></span>
-          <span class="hit"></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
+      <div class="rulebook-dots">
+        <button class="active" type="button" data-slide="0"></button>
+        <button type="button" data-slide="1"></button>
+        <button type="button" data-slide="2"></button>
+        <button type="button" data-slide="3"></button>
+        <button type="button" data-slide="4"></button>
+        <button type="button" data-slide="5"></button>
       </div>
 
     </div>
@@ -455,7 +849,6 @@
   </div>
 
 </section>
-
 
 <section class="section tight">
 
@@ -765,5 +1158,81 @@
 <script src="js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/live-score.js"></script>
+   <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const track = document.querySelector('.rulebook-track');
+  const slides = document.querySelectorAll('.rulebook-slide');
+  const prev = document.querySelector('.rulebook-prev');
+  const next = document.querySelector('.rulebook-next');
+  const dots = document.querySelectorAll('.rulebook-dots button');
+  const currentLabel = document.getElementById('rulebookCurrent');
+
+  if (!track || !slides.length) return;
+
+  let current = 0;
+  let startX = 0;
+
+  function showSlide(index) {
+
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+
+    current = index;
+
+    track.style.transform =
+      `translateX(-${current * 100}%)`;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+
+    if (currentLabel) {
+      currentLabel.textContent =
+        String(current + 1).padStart(2, '0');
+    }
+  }
+
+  if (prev) {
+    prev.addEventListener('click', function () {
+      showSlide(current - 1);
+    });
+  }
+
+  if (next) {
+    next.addEventListener('click', function () {
+      showSlide(current + 1);
+    });
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      showSlide(Number(dot.dataset.slide));
+    });
+  });
+
+  track.addEventListener('touchstart', function (e) {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', function (e) {
+
+    const endX = e.changedTouches[0].screenX;
+    const diff = endX - startX;
+
+    if (Math.abs(diff) < 45) return;
+
+    if (diff < 0) {
+      showSlide(current + 1);
+    } else {
+      showSlide(current - 1);
+    }
+
+  }, { passive: true });
+
+  showSlide(0);
+
+});
+</script>
 </body>
 </html>
