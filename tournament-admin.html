@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Points Table & Results — Power Hitters</title>
+
+<link rel="icon" href="images/logo.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/live-score.css"><link rel="stylesheet" href="css/tournament.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body data-tournament-admin="true">
+
+<nav>
+  <div class="wrap">
+
+    <a class="logo" href="index.html">
+      <span class="logo-badge">
+        <img src="images/logo.jpg" width="40" height="40" alt="Power Hitters logo">
+      </span>
+    </a>
+
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="champions.html">Champions</a>
+      <a href="about.html">About</a>
+      <a href="live.html">Live</a><a href="points-table.html" class="active">Points Table</a>
+      <a href="register.html">Register</a>
+    </div>
+
+    <div class="navcta">
+      <a class="btn btn-primary"
+         href="https://instagram.com/powerhitters.turf"
+         target="_blank">
+        Follow for Updates
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<header class="page-hero turf-bg"><div class="wrap"><div class="eyebrow">POWERHITTERS</div><h1 class="display">TOURNAMENT<br><span class="accent">TABLE.</span></h1><p class="lede">32 teams. Two day finals. One champion.</p></div></header><main class="section tournament-surface"><div class="wrap tournament-page"><div class="tournament-tabs" aria-label="Match pages"><a href="live.html">LIVE SCORE</a><a href="points-table.html" aria-current="page">POINTS TABLE</a></div><h2>TOURNAMENT ADMIN</h2><p class="tournament-note">Select a ready match below to open the scorer. Tied matches require an explicit winner after your tie-break.</p><div id="tournamentMessage" class="tournament-message" role="status">Loading tournament…</div><button id="refreshTournament" class="btn btn-ghost" style="margin:16px 0">Refresh</button><a id="tournamentLogin" class="btn btn-primary" href="admin.html" hidden>ADMIN LOGIN</a><section id="tournamentSetup" class="tournament-admin-section" hidden><h2>Enter 16 teams per day</h2><p class="tournament-note">One team per line. Lines 1 & 2 play each other, then 3 & 4, and so on. Use unique names across all 32 teams. Check the order before generating; pairings stay fixed.</p><div class="tournament-inputs"><label>Saturday<textarea id="saturdayTeams" placeholder="Saturday Team 1&#10;Saturday Team 2&#10;…&#10;Saturday Team 16"></textarea></label><label>Sunday<textarea id="sundayTeams" placeholder="Sunday Team 1&#10;Sunday Team 2&#10;…&#10;Sunday Team 16"></textarea></label></div><button id="generateBracket" class="btn btn-primary">GENERATE TOURNAMENT BRACKET</button></section><div id="tournamentRounds"></div></div></main><footer>
+  <div class="wrap">
+
+    <div class="foot-top">
+
+      <a class="logo" href="index.html">
+        <span class="logo-badge">
+          <img src="images/logo.jpg" width="36" height="36" alt="Power Hitters logo">
+        </span>
+      </a>
+
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="champions.html">Champions</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Power Hitters, Vasai West.</span>
+      <span>Made for teams who play to win.</span>
+    </div>
+
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+<script src="js/tournament.js"></script><script src="js/tournament-page.js"></script></body></html>
