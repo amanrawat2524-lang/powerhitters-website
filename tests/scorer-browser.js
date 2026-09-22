@@ -33,8 +33,18 @@
     await check('Undo exactly restores extra', async () => {
       $('undoBtn').click(); await settled(); assert($('runs').textContent === '0', 'Undo score');
     });
+    await check('Redo restores extra once and supports repeated undo/redo', async () => {
+      assert(!$('redoBtn').disabled, 'Redo available');
+      testClient.delay = 40; $('redoBtn').click(); $('redoBtn').click();
+      assert($('undoBtn').disabled && $('redoBtn').disabled, 'Redo save locked');
+      await settled(); testClient.delay = 0;
+      assert($('runs').textContent === '7' && $('oversText').textContent === '0.0' && $('redoBtn').disabled, 'Exactly restored NB');
+      $('undoBtn').click(); await settled();
+      select('normal', 1); assert($('redoBtn').disabled, 'Pending selection locks redo');
+      $('cancelBtn').click(); assert(!$('redoBtn').disabled, 'Cancel preserves redo');
+    });
     await check('normal six, dot, wide+2 and wicket', async () => {
-      await ball('normal', 6); await ball('normal', 0); await ball('wide', 2); await ball('wicket', 0);
+      await ball('normal', 6); assert($('redoBtn').disabled, 'New ball clears redo'); await ball('normal', 0); await ball('wide', 2); await ball('wicket', 0);
       assert($('runs').textContent === '9' && $('wickets').textContent === '1' && $('oversText').textContent === '0.3', 'Combined score');
     });
     await check('failed save freezes scoring and recovery keeps last saved score', async () => {
@@ -51,6 +61,8 @@
     await check('first innings transition and boundary undo', async () => {
       $('inningsBtn').click(); await settled(); assert($('targetText').textContent === '11' && $('battingName').textContent === 'B', 'Chase setup');
       $('undoBtn').click(); await settled(); assert($('runs').textContent === '10' && $('battingName').textContent === 'A' && $('targetWrap').hidden, 'Transition undo');
+      $('redoBtn').click(); await settled(); assert($('targetText').textContent === '11' && $('battingName').textContent === 'B', 'Transition redo');
+      $('undoBtn').click(); await settled();
       $('inningsBtn').click(); await settled();
     });
     await check('win on no-ball archives once; Undo removes result; tie reuses ID', async () => {
@@ -59,6 +71,13 @@
       assert(testClient.db.match_history.length === 1, 'One result');
       $('undoBtn').click(); await settled(); assert(testClient.db.match_history.length === 0, 'Removed result');
       assert($('runs').textContent === '10' && !$('noBallBtn').disabled, 'Reopened chase');
+      const archiveId = PowerHittersScoring.metadata(testClient.db.live_match[0]).archive_id;
+      $('redoBtn').click(); await settled();
+      assert($('matchStatus').textContent === 'MATCH FINISHED' && testClient.db.match_history.length === 1 && testClient.db.match_history[0].id === archiveId, 'Redo restores same result once');
+      $('undoBtn').click(); await settled();
+      $('undoBtn').click(); await settled();
+      assert($('runs').textContent === '6', 'Multiple undo');
+      $('redoBtn').click(); await settled(); assert($('runs').textContent === '10', 'Redo stack order');
       $('finishBtn').click(); await settled(); assert(testClient.db.match_history.length === 1 && testClient.db.match_history[0].winner === 'Tie', 'Tie archive');
       assert($('chaseInfo').textContent === 'MATCH TIED', 'Tie display');
     });
@@ -76,6 +95,15 @@
       await ball('normal', 0); assert($('oversText').textContent === '4.0' && $('wideBtn').disabled && $('noBallBtn').disabled, 'All locked at 24');
       $('undoBtn').click(); await settled(); assert(!$('noBallBtn').disabled, 'Undo reopens innings');
     });
+    await check('failed Redo clears future and recovers saved state', async () => {
+      $('undoBtn').click(); await settled();
+      const before = $('oversText').textContent;
+      testClient.failures.push({ table: 'live_match', verb: 'update' });
+      $('redoBtn').click(); await settled();
+      assert(!$('recoveryBtn').hidden && $('redoBtn').disabled, 'Failed redo pauses');
+      $('recoveryBtn').click(); await settled();
+      assert($('oversText').textContent === before && $('redoBtn').disabled, 'Recovery discards stale redo');
+    });
     select('noball', 4);
     const report = document.createElement('pre'); report.id = 'browserTestResults';
     report.style.cssText = 'background:white;color:#111;padding:16px;white-space:pre-wrap';
@@ -86,3 +114,4 @@
     document.body.append(report); await fetch('/results', { method: 'POST', body: report.textContent });
   }
 })();
+

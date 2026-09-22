@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const store = new window.PowerHittersScorerStore(client);
   let state = null;
   let pending = null;
+  let redoStack = []; // Session-only; reload/recovery discards stale future states.
   let mode = 'normal';
   let saving = false;
   let blocked = false;
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     $('inningsBtn').textContent = state.innings === 1 ? 'END 1ST / START 2ND INNINGS' : 'END 2ND INNINGS';
     $('inningsBtn').disabled = locked || !!pending || state.status !== 'live';
     $('finishBtn').disabled = locked || !!pending || state.status !== 'live' || state.innings !== 2;
+    $('redoBtn').disabled = locked || !!pending || redoStack.length === 0;
     $('undoBtn').disabled = locked || !!pending || E.snapshots(state).length === 0;
     $('newMatchBtn').disabled = locked || !!pending || state.status !== 'finished';
   }
@@ -97,18 +99,20 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function failed(error) {
+    redoStack = [];
     blocked = true;
     pending = null;
     message = 'Scoring paused: ' + (error.message || String(error)) +
       ' Use RELOAD / RETRY SYNC, then verify the displayed score before selecting another delivery. Do not repeat the last ball blindly.';
   }
 
-  async function change(build) {
+  async function change(build, historyAction = 'new') {
     if (saving || blocked || !authenticated) return;
     saving = true;
     message = 'Saving…';
     render();
     try {
+      const previous = E.copy(state);
       const candidate = await build();
       state = await store.write(state, candidate);
       pending = null;
@@ -116,6 +120,9 @@ document.addEventListener('DOMContentLoaded', async function () {
       showMatch();
       // Keep controls locked until BOTH score and result persistence are verified.
       await store.syncArchive(state);
+      if (historyAction === 'undo') redoStack.push(previous);
+      else if (historyAction === 'redo') redoStack.pop();
+      else redoStack = [];
       message = state.status === 'finished' ? 'Saved — match finished and history verified.' :
         state.legal_balls >= E.maxBalls(state) ? 'Over limit reached. End the innings to start the chase.' : 'Saved ✓ — select the next delivery.';
     } catch (error) {
@@ -130,6 +137,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (saving || !authenticated) return;
     saving = true;
     pending = null;
+    redoStack = [];
     message = 'Loading saved match and checking history…';
     render();
     try {
@@ -178,7 +186,11 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
   $('undoBtn').addEventListener('click', () => {
     if (pending || saving || blocked) return;
-    change(() => E.undo(state));
+    change(() => E.undo(state), 'undo');
+  });
+  $('redoBtn').addEventListener('click', () => {
+    if (pending || saving || blocked || !redoStack.length) return;
+    change(() => E.copy(redoStack[redoStack.length - 1]), 'redo');
   });
   function endInnings() {
     if (pending || saving || blocked || state?.status !== 'live') return;
@@ -225,6 +237,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   client.auth.onAuthStateChange((event, session) => {
     authenticated = !!session;
     if (!session) {
+      redoStack = [];
       pending = null;
       $('authGate').hidden = false;
       $('authGate').querySelector('h1').textContent = 'Admin login required';
