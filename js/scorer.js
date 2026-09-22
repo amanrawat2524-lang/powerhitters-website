@@ -22,6 +22,36 @@ document.addEventListener('DOMContentLoaded', async function () {
   const client = window.supabase.createClient('https://icebgysininolvjbueet.supabase.co',
     'sb_publishable_h654diItHmAibeSCRd1y6w_iyLyPB-4', { global: { fetch: boundedFetch } });
   const store = new window.PowerHittersScorerStore(client);
+  const T = window.PowerHittersTournament;
+  const tournament = T ? T.api(client) : null;
+  let bracketMatches = [];
+  let bracketLoading = false;
+  let requestedMatch = new URLSearchParams(location.search).get('tournament_match');
+  function selectedMatch() { return bracketMatches.find(m => String(m.id) === $('tournamentMatch').value); }
+  function fillMatch() {
+    const m = selectedMatch();
+    if (m) { $('teamA').value = m.team_a; $('teamB').value = m.team_b; }
+    $('teamA').readOnly = $('teamB').readOnly = !!m;
+  }
+  async function refreshBracket() {
+    if (!tournament || bracketLoading) return;
+    bracketLoading = true;
+    render();
+    const selected = requestedMatch || $('tournamentMatch').value;
+    $('refreshBracketBtn').disabled = true;
+    try {
+      bracketMatches = await tournament.load();
+      $('tournamentMatch').replaceChildren(new Option('Standalone match — enter teams below', ''));
+      bracketMatches.filter(T.ready).forEach(m => $('tournamentMatch').add(new Option(T.label(m) + ' — ' + m.team_a + ' vs ' + m.team_b, String(m.id))));
+      if (bracketMatches.some(m => T.ready(m) && String(m.id) === selected)) $('tournamentMatch').value = selected;
+      $('bracketMessage').textContent = selected && !$('tournamentMatch').value ? 'Requested bracket match is not ready or already started. Choose another match.' : bracketMatches.length ? 'Only ready, unplayed matches appear here.' : 'No bracket configured. Standalone scoring is available.';
+      requestedMatch = null;
+      fillMatch();
+    } catch (e) { $('bracketMessage').textContent = e.message + ' Standalone scoring remains available.'; }
+    finally { bracketLoading = false; render(); }
+  }
+  $('tournamentMatch').addEventListener('change', fillMatch);
+  $('refreshBracketBtn').addEventListener('click', refreshBracket);
   let state = null;
   let pending = null;
   let redoStack = []; // Session-only; reload/recovery discards stale future states.
@@ -62,7 +92,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     $('saveState').setAttribute('role', blocked ? 'alert' : 'status');
     $('recoveryBtn').hidden = !blocked;
     $('recoveryBtn').disabled = saving;
-    $('startMatchBtn').disabled = locked;
+    $('startMatchBtn').disabled = locked || bracketLoading;
+    $('refreshBracketBtn').disabled = locked || bracketLoading;
     $('logoutBtn').disabled = saving;
     document.querySelectorAll('#setupCard input, #setupCard select').forEach(el => { el.disabled = locked; });
     $('setupMessage').textContent = message;
@@ -205,6 +236,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     $('scorerCard').hidden = true;
     $('setupCard').hidden = false;
     $('backToMatchBtn').hidden = false;
+    refreshBracket();
   });
   $('backToMatchBtn').addEventListener('click', () => { if (!saving) showMatch(); });
   $('startMatchBtn').addEventListener('click', () => {
@@ -219,12 +251,22 @@ document.addEventListener('DOMContentLoaded', async function () {
       alert('Enter a whole number of overs from 1 to 50.'); return;
     }
     const first = $('battingFirst').value === 'A';
+    const bracketSelection = selectedMatch();
     change(async () => {
       if (state) await store.syncArchive(state);
-      return store.withIdentity({ id: 1, team_a: teamA, team_b: teamB, overs_limit: overs,
+      if (bracketSelection) {
+        if (!await tournament.isAdmin()) throw new Error('Tournament administrator access required.');
+        const fresh = (await tournament.load()).find(m => m.id === bracketSelection.id);
+        if (!fresh || !T.ready(fresh) || fresh.bracket_id !== bracketSelection.bracket_id || fresh.team_a !== teamA || fresh.team_b !== teamB) throw new Error('Bracket changed. Refresh the match list before starting.');
+      }
+      const next = await store.withIdentity({ id: 1, team_a: teamA, team_b: teamB, overs_limit: overs,
         batting_team: first ? teamA : teamB, bowling_team: first ? teamB : teamA,
         innings: 1, runs: 0, wickets: 0, legal_balls: 0, target: null,
         status: 'live', winner: null, history: [] });
+      if (bracketSelection) {
+        Object.assign(E.metadata(next), { tournament_match_id: bracketSelection.id, tournament_bracket_id: bracketSelection.bracket_id, match_group: T.label(bracketSelection) });
+      }
+      return next;
     });
   });
   $('recoveryBtn').addEventListener('click', recover);
@@ -253,6 +295,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     authenticated = true;
     $('authGate').hidden = true;
     await recover();
+    refreshBracket();
   } catch (error) {
     $('authGate').querySelector('h1').textContent = error.message;
   }
