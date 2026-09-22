@@ -273,7 +273,9 @@ document.addEventListener('DOMContentLoaded', function () {
         chaseText.hidden = false;
 
         chaseText.textContent =
-          match.winner
+          match.winner === 'Tie'
+            ? 'Match tied'
+            : match.winner
             ? match.winner + ' won the match'
             : 'Match finished';
 
