@@ -27,6 +27,16 @@
    <link rel="stylesheet" href="css/live-score.css">
 
 <style>
+/* Homepage registration banner */
+.registration-banner{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px;
+  padding:14px 18px;background:var(--floodlight);color:var(--turf-darker);
+  text-align:center;font-size:14px;font-weight:700;line-height:1.5;letter-spacing:0.04em;
+}
+.registration-banner strong{font-weight:800;}
+.registration-banner:hover span{text-decoration:underline;}
+.registration-banner:focus-visible{outline:3px solid var(--turf-darker);outline-offset:-5px;}
+
 /* =========================
    SEASON 3 PARTNERS
 ========================= */
@@ -437,6 +447,10 @@
 
   </div>
 </nav>
+<a class="registration-banner" href="register.html">
+  <strong>LAST 3 DAYS</strong>
+  <span>— REGISTER YOUR TEAM NOW <span aria-hidden="true">→</span></span>
+</a>
    <a href="live.html" id="liveMatchBanner" class="live-match-banner" hidden>
   <span class="live-match-dot"></span>
   <span id="liveBannerText">LIVE NOW — VIEW MATCH</span>
