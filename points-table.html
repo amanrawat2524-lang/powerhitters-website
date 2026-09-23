@@ -14,9 +14,29 @@
 <link rel="stylesheet" href="css/live-score.css"><link rel="stylesheet" href="css/tournament.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+.points-page .page-hero{padding:22px 0;}
+.points-page .page-hero .eyebrow{margin-bottom:10px;padding:5px 10px;font-size:10px;}
+.points-page .page-hero h1{font-size:36px;line-height:1.1;}
+.points-page .page-hero .lede{margin-top:8px;font-size:14px;}
+.points-page .section{padding:20px 0 32px;}
+.points-page .tournament-tabs{margin-bottom:14px;}
+.points-page .bracket-day{margin:20px 0;}
+@media(max-width:680px){
+ .points-page .page-hero{padding:14px 0;}
+ .points-page .page-hero .eyebrow,.points-page .page-hero .lede{display:none;}
+ .points-page .page-hero h1{font-size:28px;}
+ .points-page .section{padding:12px 0 24px;}
+ .points-page .tournament-tabs{gap:8px;margin-bottom:12px;}
+ .points-page .tournament-tabs a{padding:10px 8px;min-height:44px;display:flex;align-items:center;justify-content:center;}
+ .points-page .tournament-note{font-size:12px;line-height:1.5;margin-bottom:12px;}
+ .points-page .tournament-message{padding:16px;}
+ .points-page .bracket-day{margin:16px 0;}
+}
+</style>
 </head>
 
-<body>
+<body class="points-page">
 
 <nav>
   <div class="wrap">
@@ -55,7 +75,7 @@
 </nav>
 
 
-<header class="page-hero turf-bg"><div class="wrap"><div class="eyebrow">POWERHITTERS</div><h1 class="display">TOURNAMENT<br><span class="accent">TABLE.</span></h1><p class="lede">32 teams. Two day finals. One champion.</p></div></header><main class="section tournament-surface"><div class="wrap tournament-page"><div class="tournament-tabs" aria-label="Match pages"><a href="live.html">LIVE SCORE</a><a href="points-table.html" aria-current="page">POINTS TABLE</a></div><p class="tournament-note">Knockout results · Run rate is display-only. Day-final winners play the Grand Final; day-final runners-up play for 3rd place.</p><div id="tournamentMessage" class="tournament-message" role="status">Loading tournament…</div><button id="refreshTournament" class="btn btn-ghost" style="margin:16px 0">Refresh</button><div id="tournamentRounds"></div></div></main><footer>
+<header class="page-hero turf-bg"><div class="wrap"><div class="eyebrow">POWERHITTERS</div><h1 class="display">TOURNAMENT <span class="accent">TABLE.</span></h1><p class="lede">32 teams. Two day finals. One champion.</p></div></header><main class="section tournament-surface"><div class="wrap tournament-page"><div class="tournament-tabs" aria-label="Match pages"><a href="live.html">LIVE SCORE</a><a href="points-table.html" aria-current="page">POINTS TABLE</a></div><p class="tournament-note">Knockout results · Run rate is display-only. Day-final winners play the Grand Final; day-final runners-up play for 3rd place.</p><div id="tournamentMessage" class="tournament-message" role="status">Loading tournament…</div><button id="refreshTournament" class="btn btn-ghost" style="margin:16px 0">Refresh</button><div id="tournamentRounds"></div></div></main><footer>
   <div class="wrap">
 
     <div class="foot-top">
