@@ -27,15 +27,17 @@
    <link rel="stylesheet" href="css/live-score.css">
 
 <style>
-/* Homepage registration banner */
-.registration-banner{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px;
-  padding:14px 18px;background:var(--floodlight);color:var(--turf-darker);
-  text-align:center;font-size:14px;font-weight:700;line-height:1.5;letter-spacing:0.04em;
-}
-.registration-banner strong{font-weight:800;}
-.registration-banner:hover span{text-decoration:underline;}
-.registration-banner:focus-visible{outline:3px solid var(--turf-darker);outline-offset:-5px;}
+/* Final registration countdown */
+.registration-deadline{padding:26px 16px;background:#f4d345;color:#092e23;text-align:center;border-bottom:4px solid #092e23;}
+.registration-deadline h2{font-family:'Anton',sans-serif;font-size:clamp(28px,5vw,48px);line-height:1.15;margin:0 0 8px;letter-spacing:.03em;}
+.registration-deadline p{margin:6px 0 16px;font-weight:700;font-size:15px;}
+.entry-countdown{display:flex;justify-content:center;gap:12px;margin:18px auto;max-width:480px;}
+.entry-countdown[hidden],.registration-deadline a[hidden]{display:none;}
+.entry-countdown div{flex:1;min-width:0;padding:12px 8px;border-radius:12px;background:#092e23;color:#fff;box-shadow:0 4px 0 #b79b24;}
+.entry-countdown strong{display:block;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-size:clamp(36px,8vw,64px);line-height:1.1;}
+.entry-countdown span{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;margin-top:7px;}
+.deadline-register{display:inline-block;background:#092e23;color:#fff;padding:13px 24px;border-radius:7px;font-weight:800;text-decoration:none;}
+.deadline-register:hover{background:#174b38;}.deadline-register:focus-visible{outline:3px solid #092e23;outline-offset:4px;}
 
 /* =========================
    SEASON 3 PARTNERS
@@ -448,10 +450,40 @@
 
   </div>
 </nav>
-<a class="registration-banner" href="register.html">
-  <strong>LAST 3 DAYS</strong>
-  <span>— REGISTER YOUR TEAM NOW <span aria-hidden="true">→</span></span>
-</a>
+<section class="registration-deadline" aria-labelledby="entryDeadlineTitle">
+  <h2 id="entryDeadlineTitle">LAST DAY TO ENTER!</h2>
+  <p id="entryDeadlineText">Entries close 24 September 2026 at 10:00 PM IST.</p>
+  <div class="entry-countdown" id="entryCountdown" role="timer" aria-label="Time remaining until entries close" aria-live="off" hidden>
+    <div><strong id="entryHours">--</strong><span>HOURS</span></div>
+    <div><strong id="entryMinutes">--</strong><span>MINUTES</span></div>
+    <div><strong id="entrySeconds">--</strong><span>SECONDS</span></div>
+  </div>
+  <a class="deadline-register" id="entryRegisterLink" href="register.html">REGISTER YOUR TEAM NOW &rarr;</a>
+</section>
+<script>
+(function () {
+  const deadline = Date.parse('2026-09-24T22:00:00+05:30');
+  const timer = document.getElementById('entryCountdown');
+  let interval;
+  function updateCountdown() {
+    const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+    const values = [Math.floor(remaining / 3600), Math.floor(remaining / 60) % 60, remaining % 60];
+    ['entryHours', 'entryMinutes', 'entrySeconds'].forEach(function (id, index) {
+      document.getElementById(id).textContent = String(values[index]).padStart(2, '0');
+    });
+    timer.hidden = false;
+    if (remaining === 0) {
+      document.getElementById('entryDeadlineTitle').textContent = 'ENTRIES CLOSED';
+      document.getElementById('entryDeadlineText').textContent = 'The entry deadline was 24 September 2026, 10:00 PM IST.';
+      document.getElementById('entryRegisterLink').hidden = true;
+      clearInterval(interval);
+    }
+    return remaining;
+  }
+  if (updateCountdown() > 0) interval = setInterval(updateCountdown, 1000);
+  document.addEventListener('visibilitychange', updateCountdown);
+})();
+</script>
    <a href="live.html" id="liveMatchBanner" class="live-match-banner" hidden>
   <span class="live-match-dot"></span>
   <span id="liveBannerText">LIVE NOW — VIEW MATCH</span>
