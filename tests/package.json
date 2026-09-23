@@ -1,0 +1,10 @@
+{
+  "name": "powerhitters-tournament-tests",
+  "private": true,
+  "scripts": {
+    "test": "node --test --test-isolation=none scorer.test.cjs scorer-public.test.cjs tournament-db.test.cjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}
