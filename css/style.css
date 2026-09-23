@@ -611,3 +611,33 @@ nav a.active {
   pointer-events: none;
   cursor: default;
 }
+
+/* Compact page introductions: keep the content above the fold. */
+.page-hero{padding:22px 0;}
+.page-hero .eyebrow{margin-bottom:10px;padding:5px 10px;font-size:10px;}
+.page-hero h1{font-size:36px;line-height:1.1;}
+.page-hero h1 br{display:none;}
+.page-hero h1 .accent{display:inline-block;margin-left:.15em;}
+.page-hero p.lede{margin-top:8px;font-size:14px;}
+.page-hero + .section{padding-top:20px;}
+.about-page .about-intro{padding:22px 0;}
+.about-page .about-title{font-size:36px;line-height:1.15;}
+.about-page .about-team{padding-top:24px;}
+@media(max-width:680px){
+ .page-hero{padding:14px 0;}
+ .page-hero .eyebrow,.page-hero p.lede{display:none;}
+ .page-hero h1{font-size:28px;line-height:1.15;}
+ .page-hero + .section{padding-top:12px;}
+ .about-page .about-intro{padding:16px 0;}
+ .about-page .about-intro .eyebrow{display:none;}
+ .about-page .about-title{font-size:28px;}
+ .about-page .about-intro-copy{margin-top:10px;font-size:13px;line-height:1.5;}
+ .about-page .about-team{padding-top:16px;}
+ .about-page .team-heading{margin-bottom:14px;}
+ .hero{padding-top:24px;}
+ .hero .eyebrow{margin-bottom:14px;font-size:10px;}
+ .hero h1{font-size:42px;line-height:1;}
+ .hero p.lede{margin-top:14px;font-size:15px;}
+ .hero-grid{gap:24px;padding-bottom:28px;}
+ .hero-ctas{margin-top:18px;gap:10px;}
+}
