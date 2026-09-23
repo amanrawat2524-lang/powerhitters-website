@@ -14,9 +14,31 @@
 <link rel="stylesheet" href="css/live-score.css"><link rel="stylesheet" href="css/tournament.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+/* Keep the public scoreboard near the top, especially on phones. */
+.live-page .page-hero{padding:22px 0;}
+.live-page .page-hero .eyebrow{margin-bottom:10px;padding:5px 10px;font-size:10px;}
+.live-page .page-hero h1{font-size:36px;line-height:1.1;}
+.live-page .page-hero h1 br{display:none;}
+.live-page .page-hero .lede{margin-top:8px;font-size:14px;}
+.live-page .section{padding:20px 0 32px;}
+.live-page .tournament-tabs{max-width:1050px;margin:0 auto 14px;}
+@media(max-width:680px){
+ .live-page .page-hero{padding:14px 0;}
+ .live-page .page-hero .eyebrow,.live-page .page-hero .lede{display:none;}
+ .live-page .page-hero h1{font-size:28px;}
+ .live-page .section{padding:12px 0 24px;}
+ .live-page .tournament-tabs{gap:8px;margin-bottom:12px;}
+ .live-page .tournament-tabs a{padding:10px 8px;min-height:44px;display:flex;align-items:center;justify-content:center;}
+ .live-page .ph-live-inner{padding:18px;}
+ .live-page .ph-live-team{overflow-wrap:anywhere;}
+ .live-page #noLiveMatch{padding:28px 16px!important;}
+}
+</style>
 </head>
 
-<body>
+<body class="live-page">
 
 <nav>
   <div class="wrap">
