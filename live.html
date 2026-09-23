@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/live-score.css">
+<link rel="stylesheet" href="css/live-score.css"><link rel="stylesheet" href="css/tournament.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -85,9 +85,10 @@
 
   <div class="wrap">
 
+    <div class="tournament-tabs" aria-label="Match pages"><a href="live.html" aria-current="page">LIVE SCORE</a><a href="points-table.html">POINTS TABLE</a></div>
     <div id="liveMatchPageCard" class="ph-live-score">
 
-      <div class="ph-live-inner">
+      <div id="liveMatchDetails" class="ph-live-inner" hidden>
 
         <div class="ph-live-head">
 
@@ -134,25 +135,10 @@
 
       </div>
 
+      <div id="noLiveMatch" class="ph-live-inner" style="text-align:center;padding:48px 20px"><div class="sec-eyebrow">LIVE SCORE</div><h2 class="display">No live match right now.</h2><p id="liveEmptyMessage">Live match will be shown here.</p></div>
     </div>
 
 
-    <div id="noLiveMatch" style="display:none; text-align:center; padding:50px 20px;">
-
-      <div class="sec-eyebrow">
-        NO MATCH LIVE
-      </div>
-
-      <h2 class="display">
-        No match is<br>
-        <span class="accent">live right now.</span>
-      </h2>
-
-      <p>
-        Check back during tournament hours for live scores.
-      </p>
-
-    </div>
 
   </div>
 
@@ -213,14 +199,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function renderMatch(match) {
 
-    if (!match || match.status === 'not_started') {
-      liveCard.style.display = 'none';
+    if (!match || match.status !== 'live') {
+      liveCard.style.display = 'block';
+      document.getElementById('liveMatchDetails').hidden = true;
+      document.getElementById('liveEmptyMessage').textContent = 'Live match will be shown here.';
       noLive.style.display = 'block';
       return;
     }
 
     liveCard.style.display = 'block';
     noLive.style.display = 'none';
+    document.getElementById('liveMatchDetails').hidden = false;
 
     document.getElementById('pageLiveStatus').textContent =
       match.status === 'finished' ? 'FINAL' : 'LIVE';
@@ -315,6 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (error) {
       console.error(error);
+      document.getElementById('liveEmptyMessage').textContent = 'Live score is temporarily unavailable. Please refresh to retry.';
       return;
     }
 

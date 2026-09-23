@@ -25,14 +25,17 @@ test('public page renders live legal overs/target and realtime tie', async () =>
   assert.equal(ui.get('pageOvers').textContent, '1.1');
   assert.equal(ui.get('pageChaseText').textContent, 'Need 12 runs from 17 balls');
   ui.update({ ...s, runs: 20, status: 'finished', winner: 'Tie' });
-  assert.equal(ui.get('pageChaseText').textContent, 'Match tied');
-  assert.equal(ui.get('pageLiveStatus').textContent, 'FINAL');
+  assert.equal(ui.get('liveMatchDetails').hidden, true);
+  assert.equal(ui.get('liveEmptyMessage').textContent, 'Live match will be shown here.');
+  assert.equal(ui.get('noLiveMatch').style.display, 'block');
   ui.update({ ...s, runs: 21, status: 'finished', winner: 'B' });
-  assert.equal(ui.get('pageChaseText').textContent, 'B won the match');
+  assert.equal(ui.get('liveMatchDetails').hidden, true);
+  ui.update(s); assert.equal(ui.get('liveMatchDetails').hidden, false);
 });
 test('public no-match state remains supported', async () => {
   const ui = await mount(source, null);
-  assert.equal(ui.get('liveMatchPageCard').style.display, 'none');
+  assert.equal(ui.get('liveMatchPageCard').style.display, 'block');
+  assert.equal(ui.get('liveEmptyMessage').textContent, 'Live match will be shown here.');
   assert.equal(ui.get('noLiveMatch').style.display, 'block');
 });
 test('homepage banner receives updates, hides final and returns after undo', async () => {
