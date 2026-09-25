@@ -36,8 +36,8 @@
       throw new Error('A valid second innings and target are required to finish.');
     }
     state.status = 'finished';
-    state.winner = state.runs >= state.target ? state.batting_team :
-      state.runs === state.target - 1 ? 'Tie' : state.bowling_team;
+    // Equal scores: the first-batting team (now bowling) wins.
+    state.winner = state.runs >= state.target ? state.batting_team : state.bowling_team;
     return state;
   }
 
