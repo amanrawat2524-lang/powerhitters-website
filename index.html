@@ -58,13 +58,14 @@
 
 .partner-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 22px;
   max-width: 1050px;
   margin: 0 auto;
 }
 
 .partner-card {
+  grid-column: span 2;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 18px;
@@ -110,7 +111,14 @@
   color: #767d89;
 }
 
+@media (min-width: 801px) {
+  .partner-card:nth-child(4) { grid-column: 2 / span 2; }
+}
+.partner-card-sponsor .partner-logo-box { height: 130px; }
+.partner-card-sponsor .partner-logo-box img { max-height: 130px; max-width: 100%; }
+
 @media (max-width: 800px) {
+  .partner-card { grid-column: auto; }
   .partner-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -761,7 +769,7 @@
      SEASON 3 PARTNERS
 ========================= -->
 
-<section class="section season-partners">
+<section class="section season-partners" id="partners">
 
   <div class="wrap">
 
@@ -849,6 +857,22 @@
 
       </div>
 
+
+      <div class="partner-card partner-card-sponsor">
+        <div class="partner-logo-box">
+          <img src="images/the-soda-house-logo.png" alt="The Soda House logo" width="1488" height="1488" loading="lazy">
+        </div>
+        <h3>The Soda House</h3>
+        <span class="partner-role">Official Sponsor</span>
+      </div>
+
+      <div class="partner-card partner-card-sponsor">
+        <div class="partner-logo-box">
+          <img src="images/kaafi-logo.png" alt="The Kaafi House logo" width="820" height="820" loading="lazy">
+        </div>
+        <h3>The Kaafi House</h3>
+        <span class="partner-role">Official Sponsor</span>
+      </div>
 
     </div>
 
