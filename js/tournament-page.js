@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const $ = id => document.getElementById(id);
   const admin = document.body.dataset.tournamentAdmin === 'true';
   const message = $('tournamentMessage');
+  const ruleNote = document.querySelector('.tournament-page > .tournament-note');
+  if (ruleNote) ruleNote.textContent = admin
+    ? 'Select a ready match below to open the scorer. Scores level: the team batting first automatically wins.'
+    : 'Knockout results · Scores level: the team batting first wins. Day-final winners play the Grand Final; day-final runners-up play for 3rd place.';
   let matches = [], allowed = false, busy = false, loading = false;
   const node = (tag, text, className) => {
     const n = document.createElement(tag); if (text != null) n.textContent = text;
@@ -112,23 +116,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     c.append(node('h4', T.label(m)));
     const scheduled = fixtureTime(m); if (scheduled) c.append(scheduled);
     c.append(team(m, 'a'), team(m, 'b'));
-    if (m.tied) c.append(node('p', m.status === 'completed' ? 'Scores tied · advancement decided by admin after tie-break.' : 'Scores tied · awaiting the tournament tie-break.', 'tournament-note'));
+    if (m.tied) c.append(node('p', 'Scores level · First-batting team wins under the tournament rule.', 'tournament-note'));
     if (m.status === 'live') { const a = node('a', 'VIEW LIVE SCORE'); a.href = 'live.html'; c.append(a); }
     if (admin && allowed && T.ready(m)) { const a = node('a', 'SCORE THIS MATCH'); a.href = 'scorer.html?tournament_match=' + m.id; c.append(a); }
-    if (admin && allowed && m.status === 'tied') {
-      const actions = node('div', null, 'tournament-admin-actions');
-      for (const name of [m.team_a, m.team_b]) {
-        const button = node('button', 'Advance ' + name); button.type = 'button'; button.disabled = busy;
-        button.addEventListener('click', async () => {
-          if (busy || !confirm('Confirm ' + name + ' won the tie-break and advances? The actual match score stays tied.')) return;
-          busy = true; render();
-          try { await api.resolve(m.id, name, m.revision); await load(); }
-          catch (e) { notice('Tie resolution was not confirmed. Reload and verify before retrying. ' + e.message, true); }
-          finally { busy = false; render(); }
-        }); actions.append(button);
-      }
-      c.append(actions);
-    }
     return c;
   }
   function render() {
