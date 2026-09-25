@@ -23,10 +23,95 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (score) row.append(node('span', score.runs + '/' + score.wickets + ' · ' + T.overs(score.balls) + ' Overs · RR ' + T.rr(score.runs, score.balls), 'team-figures'));
     return row;
   }
+
+  // Published Season 3 Round of 16 fixtures, in India Standard Time.
+  const fixtures = {
+  "Saturday": {
+    "date": "2026-09-26",
+    "label": "26 Sep 2026",
+    "start": 16,
+    "teams": [
+      "JAY AMBE",
+      "SWING THINGS",
+      "EKTA SPORTS",
+      "DEFENDER",
+      "POWERHITTERS",
+      "TROPHY FIGHTERS",
+      "IRON PARADISE",
+      "BOSS XI",
+      "PATTERN BOYS",
+      "MUMBRA XI",
+      "WE ALL STARS",
+      "OM SHANTI",
+      "GSD WARRIORS",
+      "NAVKAR BOYS",
+      "THE SPIN KINGS",
+      "Anonymous"
+    ]
+  },
+  "Sunday": {
+    "date": "2026-09-27",
+    "label": "27 Sep 2026",
+    "start": 12,
+    "teams": [
+      "EKVIRA XI",
+      "CHEDDA BOYS",
+      "FRIENDS XI",
+      "DAKSHITA XI",
+      "YOUNGSTER BOYS",
+      "MANOR",
+      "MAULI XI B",
+      "SWAMI XI",
+      "ANCC",
+      "4K CRICKET CLUB",
+      "AYODHYA TITANS",
+      "MAULI XI A",
+      "THE SLAYERS",
+      "OCL",
+      "ALAM XI",
+      "BCC CRICKET CLUB"
+    ]
+  }
+};
+  function fixtureTime(m) {
+    const day = fixtures[m.day];
+    if (!day || m.round !== 0) return null;
+    const i = day.teams.findIndex((name, index) => index % 2 === 0 && name === m.team_a && day.teams[index + 1] === m.team_b);
+    if (i < 0) return null;
+    const minutes = day.start * 60 + (i / 2) * 30;
+    const hour = Math.floor(minutes / 60), minute = String(minutes % 60).padStart(2, '0');
+    const time = node('time', day.label + ' · ' + (hour % 12 || 12) + ':' + minute + ' PM IST', 'tournament-note');
+    time.dateTime = day.date + 'T' + String(hour).padStart(2, '0') + ':' + minute + ':00+05:30';
+    return time;
+  }
+  function reviewBracket(sat, sun) {
+    return new Promise(resolve => {
+      const dialog = node('dialog');
+      dialog.setAttribute('aria-labelledby', 'bracketReviewTitle');
+      dialog.style.cssText = 'width:min(600px,calc(100% - 32px));max-height:85vh;overflow:auto;border:0;border-radius:16px;padding:24px;background:#fff;color:#14251c;';
+      const title = node('h2', 'Confirm tournament pairings'); title.id = 'bracketReviewTitle';
+      dialog.append(title, node('p', 'Generate the 32-match bracket in this order? Pairings will be fixed; existing results cannot be overwritten.'));
+      for (const [day, teams] of [['Saturday', sat], ['Sunday', sun]]) {
+        dialog.append(node('h3', day));
+        const list = node('ol');
+        for (let i = 0; i < teams.length; i += 2) list.append(node('li', teams[i] + ' vs ' + teams[i + 1]));
+        dialog.append(list);
+      }
+      const actions = node('div', null, 'tournament-admin-actions');
+      const cancel = node('button', 'Cancel'), accept = node('button', 'CONFIRM AND GENERATE');
+      cancel.type = accept.type = 'button';
+      cancel.addEventListener('click', () => dialog.close('cancel'));
+      accept.addEventListener('click', () => dialog.close('confirm'));
+      dialog.addEventListener('close', () => { const confirmed = dialog.returnValue === 'confirm'; dialog.remove(); resolve(confirmed); }, { once: true });
+      actions.append(cancel, accept); dialog.append(actions); document.body.append(dialog); dialog.showModal(); cancel.focus();
+    });
+  }
   function card(m) {
     const c = node('article', null, 'bracket-match'); c.id = 'match-' + m.id;
     c.append(node('div', m.status === 'tied' ? 'TIE — WINNER REQUIRED' : m.status.toUpperCase(), 'match-status'));
-    c.append(node('h4', T.label(m)), team(m, 'a'), team(m, 'b'));
+    c.append(node('h4', T.label(m)));
+    const scheduled = fixtureTime(m); if (scheduled) c.append(scheduled);
+    c.append(team(m, 'a'), team(m, 'b'));
     if (m.tied) c.append(node('p', m.status === 'completed' ? 'Scores tied · advancement decided by admin after tie-break.' : 'Scores tied · awaiting the tournament tie-break.', 'tournament-note'));
     if (m.status === 'live') { const a = node('a', 'VIEW LIVE SCORE'); a.href = 'live.html'; c.append(a); }
     if (admin && allowed && T.ready(m)) { const a = node('a', 'SCORE THIS MATCH'); a.href = 'scorer.html?tournament_match=' + m.id; c.append(a); }
@@ -93,9 +178,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         sat = T.teams($('saturdayTeams').value, 'Saturday'); sun = T.teams($('sundayTeams').value, 'Sunday');
         if (new Set([...sat,...sun].map(s => s.toLocaleLowerCase())).size !== 32) throw new Error('Use different team names across both days.');
       } catch (e) { notice(e.message, true); return; }
-      if (!confirm('Generate the 32-match bracket in this order? Pairings will be fixed; existing results cannot be overwritten.')) return;
       busy = true; render();
-      try { await api.generate(sat,sun); await load(); }
+      try {
+        if (!await reviewBracket(sat, sun)) return;
+        if (!allowed) throw new Error('Admin login expired. Sign in again.');
+        await api.generate(sat,sun); await load();
+      }
       catch (e) { notice('Generation was not confirmed. Refresh to check before retrying. ' + e.message, true); }
       finally { busy = false; render(); }
     });
