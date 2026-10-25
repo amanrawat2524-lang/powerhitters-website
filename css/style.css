@@ -641,3 +641,18 @@ nav a.active {
  .hero-grid{gap:24px;padding-bottom:28px;}
  .hero-ctas{margin-top:18px;gap:10px;}
 }
+
+/* Completed-season results; scoped to preserve existing partner and admin styles. */
+.season-results{scroll-margin-top:90px;}
+.season-results-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.season-result{min-width:0;padding:28px 24px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--turf-mid);color:var(--chalk);}
+.season-result-champion{border-top:4px solid var(--floodlight);}
+.result-place{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-dim);margin-bottom:14px;}
+.season-result h3{font-size:clamp(28px,3vw,40px);line-height:1.15;overflow-wrap:anywhere;}
+.result-prize{font-family:"JetBrains Mono",monospace;font-size:24px;font-weight:700;color:var(--floodlight);margin-top:20px;}
+.season-summary{display:flex;flex-wrap:wrap;gap:24px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--chalk-dim);font-size:13px;}
+.season-summary strong{color:var(--chalk);font-family:"JetBrains Mono",monospace;margin-right:5px;}
+.season-thanks{color:var(--chalk-dim);margin:22px 0;line-height:1.7;}
+.season-memories p{margin:18px 0 24px;line-height:1.7;}
+.season-memories .btn-ghost{color:var(--ink);border-color:var(--ink);}
+@media(max-width:700px){.season-results-grid{grid-template-columns:1fr;gap:12px;}.season-result{padding:22px;}.season-summary{gap:14px;}.season-results .sec-title{font-size:32px;}}

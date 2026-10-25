@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var SUPABASE_KEY = 'sb_publishable_h654diItHmAibeSCRd1y6w_iyLyPB-4';
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  var currentFilter = 'all';
+  var requestedSeason = new URLSearchParams(window.location.search).get('season');
+  var currentFilter = ['season1', 'season2', 'season3'].indexOf(requestedSeason) !== -1 ? requestedSeason : 'all';
+  document.querySelectorAll('.gal-filter').forEach(function (button) {
+    button.classList.toggle('active', button.dataset.filter === currentFilter);
+    button.setAttribute('aria-pressed', String(button.dataset.filter === currentFilter));
+  });
   var isAdmin = false;
   var allPhotos = [];
 
@@ -73,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // filters
   document.querySelectorAll('.gal-filter').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      document.querySelectorAll('.gal-filter').forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
+      document.querySelectorAll('.gal-filter').forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
       currentFilter = btn.dataset.filter;
       render();
     });
