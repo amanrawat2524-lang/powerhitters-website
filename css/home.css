@@ -1,0 +1,132 @@
+/* Homepage refinements only. Existing green palette and turf layers come from public.css. */
+.public-site.media-home .hero-layout{min-height:550px;padding-top:42px;padding-bottom:42px;gap:46px}
+.public-site.media-home .hero-editorial>.eyeline{margin-bottom:22px}
+.public-site.media-home .hero-editorial h1{font-size:clamp(42px,5.2vw,64px);line-height:1.08;letter-spacing:-.025em;white-space:nowrap}
+.public-site.media-home .hero-tagline{font-size:clamp(23px,2.4vw,31px);font-weight:600;line-height:1.35;letter-spacing:-.035em;margin-top:20px;color:var(--chalk)}
+.public-site.media-home .hero-description{max-width:410px;font-size:14px;line-height:1.8;margin-top:18px}
+.public-site.media-home .hero-photo>img{height:440px;object-position:center bottom}
+.public-site.media-home .hero-photo figcaption strong{font-size:27px}
+.public-site.media-home .hero-actions{margin-top:25px;gap:12px}
+.public-site.media-home .hero-actions .button{font-size:10px;gap:18px;padding:15px 18px}
+.public-site.media-home .home-location{font:8px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#b7c4b0;margin-top:24px}
+.public-site.media-home .editorial-section{padding:64px 0}
+.public-site.media-home .section-heading{margin-bottom:30px}
+.public-site.media-home .section-lead{margin-bottom:32px;gap:44px}
+.public-site.media-home .section-lead h2,.public-site.media-home .highlights-intro h2{font-size:clamp(30px,3.3vw,43px);line-height:1.12}
+.public-site.media-home .section-lead>p{font-size:13px;line-height:1.85;max-width:360px}
+.public-site.media-home .home-about{padding:44px 0;background:var(--chalk)}
+.public-site.media-home .home-about-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.public-site.media-home .home-about .eyeline{color:#53624e;margin-bottom:14px}
+.public-site.media-home .home-about h2{font-size:32px;line-height:1.12}
+.public-site.media-home .home-about-layout>div>p:not(.eyeline){font-size:14px;line-height:1.9;color:#53624e;margin-bottom:12px;max-width:580px}
+.public-site.media-home .home-season-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.public-site.media-home .home-season{display:flex;flex-direction:column;background:var(--turf-mid);border:1px solid var(--line-strong);min-width:0}
+.public-site.media-home .home-season-image{display:block;overflow:hidden}
+.public-site.media-home .home-season-image img{width:100%;height:205px;object-fit:cover}
+.public-site.media-home .home-season-body{padding:22px;display:flex;flex:1;flex-direction:column;align-items:flex-start}
+.public-site.media-home .home-season-status{display:flex;justify-content:space-between;width:100%;gap:12px;font:8px 'JetBrains Mono',monospace;letter-spacing:.05em;color:#d4dec7}
+.public-site.media-home .home-season-status span:last-child{color:#c6deb7}
+.public-site.media-home .home-season h3{font-size:25px;line-height:1.15;margin:20px 0 13px;color:var(--chalk)}
+.public-site.media-home .home-season-venue,.public-site.media-home .home-season-date{font-size:12px;line-height:1.7;color:#c9d4c0}
+.public-site.media-home .home-season-date{margin-top:4px}
+.public-site.media-home .home-season-body .text-link{margin-top:auto;padding-top:24px;font-size:9px}
+.public-site.media-home .highlights-layout{gap:64px;grid-template-columns:1.05fr 1fr}
+.public-site.media-home .highlights-intro>p{font-size:13px;line-height:1.9;margin:20px 0 24px;max-width:420px}
+.public-site.media-home .highlights-intro .button{font-size:10px;padding:14px 20px;gap:24px}
+.public-site.media-home .content-formats h3{font-size:22px}
+.public-site.media-home .home-archive-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:36px 0 20px;padding-top:24px;border-top:1px solid #cbd0bf}
+.public-site.media-home .home-archive-heading .eyeline{color:#53624e;font-size:9px}
+.public-site.media-home .home-archive-heading .text-link{font-size:9px}
+.public-site.media-home .archive-photo img{height:245px}
+.public-site.media-home .archive-photo strong{font-size:21px}
+.public-site.media-home .home-champions .section-heading{border-color:#294f3c}
+.public-site.media-home .home-champions .section-heading>.eyeline,.public-site.media-home .home-champions .section-lead>p{color:#b7c4b0}
+.public-site.media-home .home-champions-layout{display:grid;grid-template-columns:1fr 1.05fr;gap:28px}
+.public-site.media-home .home-latest-champions{padding:30px;background:var(--turf-mid);border:1px solid var(--line-strong);border-top:3px solid var(--floodlight);scroll-margin-top:110px}
+.public-site.media-home .home-latest-champions>.eyeline{font-size:9px;color:#c9d4c0}
+.public-site.media-home .home-latest-champions>h3{font-size:40px;line-height:1.08;margin-top:21px;color:var(--chalk)}
+.public-site.media-home .home-champion-subtitle{font:10px 'JetBrains Mono',monospace;color:var(--floodlight);letter-spacing:.04em;margin-top:10px}
+.public-site.media-home .home-podium-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
+.public-site.media-home .home-podium-row span{font:8px 'JetBrains Mono',monospace;color:#c1ceb5}
+.public-site.media-home .home-podium-row strong{display:block;font:400 22px 'Anton',sans-serif;margin-top:8px}
+.public-site.media-home .home-podium-row small{display:block;color:var(--floodlight);font:10px 'JetBrains Mono',monospace;margin-top:6px}
+.public-site.media-home .home-result-context{font-size:10px;line-height:1.9;color:#b7c4b0;margin-top:24px}
+.public-site.media-home .home-latest-champions>.text-link{margin-top:10px;font-size:9px}
+.public-site.media-home .home-past-champions{display:flex;flex-direction:column;gap:20px}
+.public-site.media-home .home-past-champions article{display:grid;grid-template-columns:42% 1fr;align-items:center;gap:20px;border:1px solid var(--line);padding:16px;background:var(--turf-mid);flex:1}
+.public-site.media-home .home-past-champions img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:var(--turf-darker)}
+.public-site.media-home .home-past-champions .eyeline{font-size:8px;color:#c1ceb5}
+.public-site.media-home .home-past-champions h3{font-size:18px;margin:9px 0 5px;color:var(--chalk)}
+.public-site.media-home .home-past-champions p:not(.eyeline){font-size:11px;color:#d4cfbd;line-height:1.7}
+.public-site.media-home .home-past-champions .home-runner{margin-top:9px}
+.public-site.media-home .home-partner-invitation{background:#f7f8fa}
+.public-site.media-home .home-partner-invitation>.wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;border-top:1px solid #d5d9d4;padding-top:28px;padding-bottom:34px}
+.public-site.media-home .home-partner-invitation h2{font-size:22px;line-height:1.3}
+.public-site.media-home .home-partner-invitation p{font-size:12px;line-height:1.8;color:#53624e;margin-top:8px}
+.public-site.media-home .button-green{background:var(--turf-dark);color:var(--chalk);font-size:10px;white-space:nowrap}
+.public-site.media-home .button-green:hover{background:var(--turf-mid)}
+.public-site.media-home .home-footer-description{font-size:12px;line-height:1.8;color:#c1ceb5;max-width:410px;margin-top:18px}
+.public-site.media-home #about-powerhitters,.public-site.media-home #champions{scroll-margin-top:110px}
+@media(max-width:1050px){
+.public-site.media-home .hero-layout{gap:30px;min-height:510px}
+.public-site.media-home .hero-photo>img{height:415px}
+.public-site.media-home .hero-editorial h1{font-size:50px}
+.public-site.media-home .hero-tagline{font-size:25px}
+.public-site.media-home .hero-actions .button{font-size:9px;padding:13px 15px}
+.public-site.media-home .home-about-layout{gap:36px}
+.public-site.media-home .home-season-image img{height:180px}
+.public-site.media-home .home-season-body{padding:18px}
+.public-site.media-home .home-season h3{font-size:22px}
+.public-site.media-home .home-champions-layout{gap:20px}
+.public-site.media-home .home-past-champions article{gap:14px;padding:13px}
+.public-site.media-home .home-past-champions h3{font-size:16px}
+}
+@media(max-width:700px){
+.public-site.media-home .hero-layout{min-height:0;padding-top:32px;padding-bottom:24px;gap:28px}
+.public-site.media-home .hero-editorial>.eyeline{font-size:8px;margin-bottom:19px}
+.public-site.media-home .hero-editorial h1{font-size:clamp(38px,10.8vw,54px);line-height:1.1}
+.public-site.media-home .hero-tagline{font-size:25px;margin-top:17px}
+.public-site.media-home .hero-description{font-size:13px;max-width:360px;margin-top:17px}
+.public-site.media-home .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:23px}
+.public-site.media-home .hero-actions .button{font-size:8px;gap:10px;padding:13px 12px;min-height:49px}
+.public-site.media-home .home-location{font-size:7px;line-height:1.7;margin-top:19px}
+.public-site.media-home .hero-photo>img{height:250px}
+.public-site.media-home .hero-photo figcaption strong{font-size:25px}
+.public-site.media-home .home-about{padding:34px 0}
+.public-site.media-home .home-about-layout{grid-template-columns:1fr;gap:20px}
+.public-site.media-home .home-about h2{font-size:29px}
+.public-site.media-home .home-about-layout>div>p:not(.eyeline){font-size:13px}
+.public-site.media-home .editorial-section{padding:44px 0}
+.public-site.media-home .section-heading{margin-bottom:26px}
+.public-site.media-home .section-lead h2,.public-site.media-home .highlights-intro h2{font-size:32px}
+.public-site.media-home .section-lead>p{font-size:12px;margin-top:17px}
+.public-site.media-home .home-season-grid{grid-template-columns:1fr;gap:22px}
+.public-site.media-home .home-season-image img{height:auto;aspect-ratio:16/10}
+.public-site.media-home .home-season-body{padding:20px}
+.public-site.media-home .home-season h3{font-size:25px;margin-top:17px}
+.public-site.media-home .home-season-status{font-size:9px}
+.public-site.media-home .home-season-venue,.public-site.media-home .home-season-date{font-size:12px}
+.public-site.media-home .home-season-body .text-link{padding-top:18px}
+.public-site.media-home .highlights-layout{grid-template-columns:1fr;gap:28px}
+.public-site.media-home .highlights-intro>p{font-size:13px;margin:18px 0 21px}
+.public-site.media-home .home-archive-heading{margin-top:29px;padding-top:20px;gap:15px}
+.public-site.media-home .home-archive-heading .eyeline{font-size:7px;max-width:150px}
+.public-site.media-home .home-archive-heading .text-link{font-size:8px;gap:12px}
+.public-site.media-home .archive-photo img{height:200px}
+.public-site.media-home .archive-photo:first-child img{height:260px}
+.public-site.media-home .home-champions-layout{grid-template-columns:1fr;gap:22px}
+.public-site.media-home .home-latest-champions{padding:24px}
+.public-site.media-home .home-latest-champions>h3{font-size:36px}
+.public-site.media-home .home-past-champions article{padding:14px;gap:17px}
+.public-site.media-home .home-past-champions h3{font-size:17px}
+.public-site.media-home .home-partner-invitation>.wrap{align-items:flex-start;flex-direction:column;gap:22px;padding-top:25px;padding-bottom:30px}
+.public-site.media-home .home-partner-invitation h2{font-size:21px}
+.public-site.media-home .home-footer-description{font-size:11px;max-width:330px}
+}
+@media(max-width:360px){.public-site.media-home .hero-actions{grid-template-columns:1fr}.public-site.media-home .hero-actions .button{font-size:9px}.public-site.media-home .home-past-champions article{grid-template-columns:1fr}.public-site.media-home .home-past-champions img{max-height:170px;object-fit:contain}}
+
+.public-site.media-home .home-champions{color:var(--chalk);}
+.public-site.media-home .home-podium-row strong{color:var(--chalk);}
+
+.public-site.media-home .footer-top h2{font-size:36px;}
+@media(max-width:700px){.public-site.media-home .footer-top h2{font-size:30px;}}
