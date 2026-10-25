@@ -65,9 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     filtered.forEach(function (p) {
-      var item = document.createElement('div');
+      var item = document.createElement('button');
+      item.type = 'button';
       item.className = 'gal-item';
-      item.innerHTML = '<img src="' + p.image_url + '" alt="' + (p.caption || 'Power Hitters photo') + '" loading="lazy"><div class="cap">' + (p.caption || '') + '</div>';
+      item.setAttribute('aria-label', 'View photo: ' + (p.caption || 'PowerHitters tournament photo'));
+      var image = document.createElement('img');
+      image.src = p.image_url;
+      image.alt = p.caption || 'Power Hitters photo';
+      image.loading = 'lazy';
+      image.width = 800; image.height = 800;
+      var caption = document.createElement('span');
+      caption.className = 'cap'; caption.textContent = p.caption || '';
+      item.append(image, caption);
       item.addEventListener('click', function () {
         openLightbox(p.image_url, p.caption);
       });
@@ -89,16 +98,32 @@ document.addEventListener('DOMContentLoaded', function () {
   var lightbox = document.getElementById('lightbox');
   var lbImg = document.getElementById('lightboxImg');
   var lbCap = document.getElementById('lightboxCap');
+  var photoTrigger = null;
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Tournament photo');
   function openLightbox(src, cap) {
+    photoTrigger = document.activeElement;
     lbImg.src = src;
+    lbImg.alt = cap || "PowerHitters tournament photo";
     lbCap.textContent = cap || '';
     lightbox.classList.add('open');
+    document.getElementById('lightboxClose').focus();
   }
-  document.getElementById('lightboxClose').addEventListener('click', function () {
+  function closeLightbox() {
     lightbox.classList.remove('open');
+    if (photoTrigger && photoTrigger.isConnected) photoTrigger.focus();
+  }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function (event) {
+    if (!lightbox.classList.contains('open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'Tab') {
+      event.preventDefault(); document.getElementById('lightboxClose').focus();
+    }
   });
   lightbox.addEventListener('click', function (e) {
-    if (e.target === lightbox) lightbox.classList.remove('open');
+    if (e.target === lightbox) closeLightbox();
   });
 
   // ---------- Admin: check login + upload ----------
