@@ -180,3 +180,17 @@
 .public-site [hidden]{display:none!important;}
 
 .public-site #partners{scroll-margin-top:110px;}
+
+/* Restore the original turf stripes and warm floodlight background. */
+.public-site .editorial-hero,
+.public-site .journey-section,
+.public-site .community-section,
+.public-site .page-hero,
+.public-site .about-intro,
+.public-site .dark{
+  background:
+    repeating-linear-gradient(100deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 60px, transparent 60px, transparent 120px),
+    radial-gradient(ellipse 700px 500px at 15% 0%, rgba(255,201,60,0.16), transparent 60%),
+    radial-gradient(ellipse 600px 500px at 100% 20%, rgba(255,201,60,0.10), transparent 55%),
+    linear-gradient(180deg, var(--turf-darker) 0%, var(--turf-dark) 40%, var(--turf-mid) 100%);
+}
