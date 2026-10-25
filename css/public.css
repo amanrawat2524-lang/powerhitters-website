@@ -1,0 +1,182 @@
+/* Public editorial theme. Admin, payment and scorer screens do not load this file. */
+.public-site{--turf-dark:#0b1429;--turf-darker:#070d1b;--turf-mid:#111f3a;--chalk:#f4f6fa;--chalk-dim:#b4bfd2;--floodlight:#89a9ff;--floodlight-dim:#577ad5;--leather:#db393e;--ink:#101c33;--line:rgba(228,235,249,.15);--line-strong:rgba(228,235,249,.28);background:#f4f6fa;color:#101c33}
+.public-site .wrap{max-width:1280px;padding:0 40px}
+.public-site .display{font-weight:400;letter-spacing:-.025em}
+.public-site a:focus-visible,.public-site button:focus-visible{outline:3px solid #426df6;outline-offset:5px}
+.public-site img{height:auto}
+.public-site .skip-link{position:fixed;left:18px;top:-70px;z-index:500;background:#fff;color:#101c33;padding:14px 22px;border-radius:4px}
+.public-site .skip-link:focus{top:12px}
+.public-site .site-nav{background:#080f20;border-bottom:1px solid #26314a;backdrop-filter:none}
+.public-site .site-nav .wrap{height:88px;gap:28px}
+.public-site .brand{display:flex;align-items:center;gap:12px;min-width:0;color:#fff}
+.public-site .brand>img{width:44px;height:44px;object-fit:contain;background:#fff;border-radius:6px}
+.public-site .brand>span{font-family:'Anton',sans-serif;font-size:23px;letter-spacing:-.025em;line-height:1}
+.public-site .brand-light{color:#bdc9df}
+.public-site .brand small{display:block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;letter-spacing:.1em;margin-top:7px;color:#a7b5cc}
+.public-site .navlinks{gap:24px}
+.public-site .navlinks a{font-size:10px;letter-spacing:.06em;font-weight:700;white-space:nowrap;color:#b4bfd2;padding:12px 0}
+.public-site .navlinks a.active{color:#fff}
+.public-site .navlinks a.active::after{background:#416cf3;bottom:1px;height:3px}
+.public-site .nav-social{color:#fff;border:1px solid #44516a;padding:11px 13px;font-size:10px;font-weight:700;letter-spacing:.07em;white-space:nowrap}
+.public-site .nav-social span{margin-left:10px;color:#96b0ff}
+.public-site .burger{min-width:44px;min-height:44px;align-items:center;justify-content:center;flex-shrink:0}
+.public-site .button{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;padding:17px 23px;min-height:52px;font-size:11px;font-weight:800;letter-spacing:.05em;border:1px solid transparent}
+.public-site .button span{font-size:19px;font-weight:400}
+.public-site .button-blue{background:#315fe9;color:#fff}
+.public-site .button-blue:hover{background:#234bc5}
+.public-site .button-line{color:#fff;border-color:#68768c}
+.public-site .button-line:hover{background:#172744}
+.public-site .eyeline{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.6;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.public-site .red-mark{display:inline-block;background:#e3454b;width:7px;height:7px;margin-right:10px}
+.public-site .blue-text{color:#315fe9}
+.public-site .silver-text{color:#b5c4e1}
+.public-site .text-link{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid #7b889e;padding:10px 0;color:#16223a;font-size:10px;font-weight:800;letter-spacing:.08em;line-height:1.6}
+.public-site .text-link span{font-size:22px;font-weight:400}
+.public-site .text-link.light{color:#eef3ff;border-color:#536381}
+.public-site .editorial-hero{background:#0a1327;color:#fff;overflow:hidden}
+.public-site .hero-layout{display:grid;grid-template-columns:1.08fr 1fr;gap:36px;align-items:center;min-height:660px;padding-top:46px;padding-bottom:46px}
+.public-site .hero-editorial{position:relative;z-index:1}
+.public-site .hero-editorial>.eyeline{color:#c2cee4;margin-bottom:30px}
+.public-site .hero-editorial h1{font-size:clamp(62px,7.6vw,105px);line-height:.99;letter-spacing:-.025em;white-space:nowrap}
+.public-site .hero-editorial h1>span{color:#80a3ff}
+.public-site .hero-description{font-size:14px;line-height:1.9;color:#bcc8de;max-width:440px;margin-top:26px}
+.public-site .hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+.public-site .hero-footnote{display:flex;gap:25px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:8px;color:#95a5c0;letter-spacing:.08em;margin-top:38px;padding-top:22px;border-top:1px solid #2c3850}
+.public-site .hero-photo{position:relative;margin:0;min-width:0}
+.public-site .hero-photo>img{width:100%;height:554px;object-fit:cover;object-position:52% center}
+.public-site .hero-photo::after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(5,11,22,.9));pointer-events:none}
+.public-site .hero-photo figcaption{position:absolute;z-index:1;left:28px;bottom:26px;color:#fff}
+.public-site .hero-photo figcaption>span{display:block;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;border-left:3px solid #ef4b52;padding-left:10px;margin-bottom:12px}
+.public-site .hero-photo figcaption strong{display:block;font-family:'Anton',sans-serif;font-size:32px;font-weight:400}
+.public-site .hero-photo figcaption small{font-size:11px;color:#d8e1ee}
+.public-site .brand-ribbon{background:#315fe9;color:#fff}
+.public-site .brand-ribbon .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-top:21px;padding-bottom:21px}
+.public-site .brand-ribbon span{font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.015em}
+.public-site .brand-ribbon i{font-size:25px;color:#a2baff;font-style:normal}
+.public-site .editorial-section{padding:84px 0}
+.public-site .section-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:42px;padding-bottom:18px;border-bottom:1px solid #c9d0dc}
+.public-site .section-heading>.eyeline{color:#58657b}
+.public-site .section-index{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.09em;color:#66738a}
+.public-site .section-lead{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:42px}
+.public-site .section-lead h2,.public-site .highlights-intro h2,.public-site .community-layout h2{font-size:clamp(40px,4.5vw,62px);line-height:1.03}
+.public-site .section-lead>p{font-size:14px;line-height:1.85;max-width:350px;color:#58657b;padding-bottom:4px}
+.public-site .highlights-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;align-items:start}
+.public-site .highlights-intro>p{font-size:14px;line-height:1.85;color:#58657b;max-width:360px;margin:23px 0}
+.public-site .content-formats>div{display:grid;grid-template-columns:30px 1fr auto;gap:18px;border-bottom:1px solid #c9d0dc;padding:24px 0;align-items:start}
+.public-site .content-formats>div:first-child{padding-top:4px}
+.public-site .format-number{color:#315fe9;font:11px 'JetBrains Mono',monospace;padding-top:7px}
+.public-site .content-formats h3{font:400 23px 'Anton',sans-serif;color:#101c33}
+.public-site .content-formats p{font-size:12px;color:#58657b;line-height:1.7;max-width:310px;margin-top:8px}
+.public-site .format-tag{font:8px 'JetBrains Mono',monospace;color:#68768a;letter-spacing:.06em;padding-top:9px}
+.public-site .journey-section,.public-site .community-section{background:#0a1327;color:#f4f6fa}
+.public-site .journey-section .section-heading,.public-site .community-section .section-heading{border-color:#2b3954}
+.public-site .journey-section .eyeline,.public-site .community-section .eyeline{color:#a7b8d4}
+.public-site .journey-section .section-lead>p{color:#a7b8d4}
+.public-site .season-stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.public-site .season-story-top{display:flex;justify-content:space-between;gap:16px;font:9px 'JetBrains Mono',monospace;color:#b7c5df;margin-bottom:14px}
+.public-site .season-story-top>span+span{font-size:8px;color:#93a5c5}
+.public-site .season-stories img{width:100%;height:218px;object-fit:cover;object-position:center}
+.public-site .season-stories article h3{font-size:27px;margin:22px 0 18px}
+.public-site .season-stories dl{border-top:1px solid #2a3851;padding-top:13px}
+.public-site .season-stories dl>div{display:flex;justify-content:space-between;gap:15px;margin-top:10px;align-items:baseline}
+.public-site .season-stories dt{font:8px 'JetBrains Mono',monospace;color:#9aaac5}
+.public-site .season-stories dd{font-size:12px;color:#ecf1fc;text-align:right}
+.public-site .season3-strip{display:grid;grid-template-columns:1fr 1.5fr auto;gap:30px;border-top:1px solid #38496a;border-bottom:1px solid #38496a;padding:27px 0;margin-top:48px;align-items:center;scroll-margin-top:110px}
+.public-site .season-date{font-size:10px;line-height:1.9;color:#aabbd7;margin-top:9px}
+.public-site .podium-line{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.public-site .podium-line small{display:block;font:7px 'JetBrains Mono',monospace;letter-spacing:.04em;color:#aebedb}
+.public-site .podium-line strong{display:block;font:400 21px 'Anton',sans-serif;margin-top:8px;overflow-wrap:anywhere}
+.public-site .podium-line span{display:block;color:#8eacff;font:11px 'JetBrains Mono',monospace;margin-top:5px}
+.public-site .round-link{display:grid;place-items:center;border:1px solid #6d82a6;border-radius:50%;width:46px;height:46px;font-size:25px}
+.public-site .archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.public-site .archive-photo{position:relative;display:block;overflow:hidden;background:#12213a;min-width:0}
+.public-site .archive-photo img{width:100%;height:320px;object-fit:cover}
+.public-site .archive-photo::after{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(transparent,rgba(2,8,21,.92))}
+.public-site .archive-photo>span{position:absolute;z-index:1;left:22px;right:22px;bottom:22px;color:#fff}
+.public-site .archive-photo small{display:block;font:8px 'JetBrains Mono',monospace;letter-spacing:.1em;margin-bottom:8px}
+.public-site .archive-photo strong{font:400 23px 'Anton',sans-serif;line-height:1.2;display:block}
+.public-site .archive-photo:hover img{transform:scale(1.02)}
+.public-site .community-layout{display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.public-site .community-layout>div>p{font-size:14px;line-height:1.9;max-width:450px;color:#acbdd9;margin-top:26px}
+.public-site .founder-roster article{display:flex;gap:24px;border-bottom:1px solid #2b3954;padding:20px 0}
+.public-site .founder-roster article:first-child{padding-top:0}
+.public-site .founder-roster article>span{font:10px 'JetBrains Mono',monospace;color:#7f9fec;margin-top:5px}
+.public-site .founder-roster h3{font-size:21px;line-height:1.3;color:#f4f6fa}
+.public-site .founder-roster small{display:block;font:8px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8eacff;margin-top:5px}
+.public-site .founder-roster p{font-size:11px;line-height:1.7;margin-top:9px;color:#afbeda}
+.public-site .site-footer{padding:0;background:#060b16;color:#f4f6fa}
+.public-site .footer-top{display:flex;justify-content:space-between;align-items:center;gap:36px;border-bottom:1px solid #28344a;padding:56px 0}
+.public-site .footer-top .eyeline{color:#8ea0bd;margin-bottom:18px}
+.public-site .footer-top h2{font-size:clamp(34px,4vw,51px);line-height:1.08}
+.public-site .footer-grid{display:grid;grid-template-columns:1.4fr .8fr 1fr 1fr;gap:36px;padding:42px 0}
+.public-site .footer-grid>.brand{align-self:start}
+.public-site .footer-grid>div>p{font:9px 'JetBrains Mono',monospace;letter-spacing:.06em;color:#8194b4;margin-bottom:18px}
+.public-site .footer-grid>div>a,.public-site .footer-grid>div>span{display:block;font-size:11px;line-height:1.7;color:#c2cee2;margin-top:8px}
+.public-site .footer-bottom{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #202c40;padding:20px 0;color:#8294b1;font-size:9px}
+.public-site .site-footer a:hover{color:#fff}
+.public-site .section{padding:64px 0}
+.public-site .page-hero{padding:62px 0 48px;background:#0a1327;border-bottom:1px solid #263551}
+.public-site .page-hero h1{font-size:clamp(42px,5.5vw,72px);line-height:1.05}
+.public-site .page-hero .eyebrow{border:0;padding:0;color:#a3baff;margin-bottom:18px;font-size:10px;box-shadow:none}
+.public-site .page-hero .over-dots{display:none}
+.public-site .page-hero p.lede{display:block;font-size:14px;line-height:1.85;max-width:650px;color:#b4bfd2;margin-top:22px}
+.public-site .page-hero .accent{color:#a4beff}
+.public-site .dark{background:#0c172c}
+.public-site .sec-title{font-size:clamp(32px,4vw,50px);line-height:1.08}
+.public-site .dark .sec-sub{color:#b4bfd2}
+.public-site .badge.done{color:#c7d6f3;background:#243550}
+.public-site .ticket{border-radius:0}
+.public-site .ticket.closed .ticket-main h3{color:#f4f6fa}
+.public-site .ticket-stub::before{display:none}
+.public-site .btn{border-radius:3px;box-shadow:none}
+.public-site .btn-primary{background:#315fe9;color:#fff}
+.public-site .btn-primary:hover{background:#234bc5;box-shadow:none}
+.public-site .btn-ghost{border-color:#7083a3}
+.public-site .season-result{border-radius:3px}
+.public-site .season-result-champion{border-top-color:#527df7}
+.public-site .season-result .result-prize{color:#99b5ff}
+.public-site .champ-card{border-radius:3px}
+.public-site .champ-photo-banner .champ-badge{background:#315fe9;color:#fff;border-radius:3px}
+.public-site .champ-photo-banner{border-radius:3px 3px 0 0}
+.public-site .champ-result-item{border-radius:3px}
+.public-site .gal-filter{border-radius:3px;color:#c0cde5}
+.public-site .gal-filter.active,.public-site .gal-filter:hover{background:#315fe9;border-color:#315fe9;color:#fff}
+.public-site .gal-item,.public-site .gal-add-tile{border-radius:3px}
+.public-site .register-cta{border-radius:3px;background:#101e39;color:#fff}
+.public-site .register-cta h2{color:#f4f6fa}
+.public-site .register-cta p{color:#b4bfd2}
+.public-site .register-panel{background:#0a1327;border-radius:3px}
+.public-site .about-page{background:#f4f6fa;color:#101c33}
+.public-site .about-intro{background:#0a1327;border:0;padding:62px 0 48px}
+.public-site .about-intro .eyebrow{color:#9bb6fc}
+.public-site .about-title{color:#f4f6fa;font-size:clamp(42px,5vw,68px);line-height:1.06}
+.public-site .about-title .accent{color:#a4beff}
+.public-site .about-intro-copy{color:#bdc9df;max-width:760px;font-size:15px;line-height:1.9}
+.public-site .team-heading .eyebrow{color:#315fe9}
+.public-site .team-heading h2{color:#101c33;font-size:34px}
+.public-site .founder-card{border:1px solid #cbd3df;border-radius:3px;box-shadow:none}
+.public-site .founder-photo-frame{background:#182947}
+.public-site .founder-placeholder{background:#182947;color:#d7e4ff}
+.public-site .founder-info h3{color:#101c33}
+.public-site .founder-info p,.public-site .about-closing{color:#53617a}
+.public-site .founder-info p span{color:#315fe9}
+.public-site .about-closing{border-color:#c8d1df;font-size:16px}
+.public-site .founder-card:hover,.public-site .btn:hover,.public-site button:hover{transform:none}
+.public-site #highlights,.public-site #journey,.public-site #moments,.public-site #season1,.public-site #season2{scroll-margin-top:110px}
+@media(max-width:1120px){.public-site .wrap{padding-left:28px;padding-right:28px}.public-site .site-nav .wrap{gap:18px}.public-site .navlinks{gap:15px}.public-site .brand>span{font-size:20px}.public-site .brand>img{width:38px;height:38px}.public-site .nav-social{padding:10px;font-size:9px}.public-site .hero-layout{gap:24px;min-height:590px}.public-site .hero-editorial h1{font-size:clamp(58px,7.5vw,88px)}.public-site .hero-photo>img{height:490px}.public-site .highlights-layout{gap:36px}.public-site .format-tag{display:none}.public-site .content-formats>div{grid-template-columns:28px 1fr}.public-site .season-stories img{height:190px}.public-site .season3-strip{grid-template-columns:1fr 1.6fr}.public-site .season3-strip .round-link{display:none}}
+@media(max-width:960px){.public-site .site-nav .wrap{height:78px}.public-site .burger{display:flex;margin-left:auto}.public-site .navlinks{display:none;position:absolute;top:78px;left:0;right:0;background:#080f20;transform:none;transition:none;gap:0;border-bottom:1px solid #394967;padding:18px 28px;align-items:stretch}.public-site .navlinks.open{display:flex;flex-direction:column;transform:none}.public-site .navlinks a{padding:15px 0;font-size:12px}.public-site .navlinks a.active::after{display:none}.public-site .hero-layout{min-height:0;padding-top:40px;padding-bottom:40px}.public-site .hero-editorial h1{font-size:clamp(46px,7.6vw,76px)}.public-site .hero-description{font-size:13px}.public-site .hero-actions{gap:12px}.public-site .button{font-size:9px;gap:15px;padding:14px 16px}.public-site .hero-photo>img{height:460px}.public-site .hero-footnote{font-size:7px;gap:12px}.public-site .hero-photo figcaption strong{font-size:26px}.public-site .section-lead{gap:28px}.public-site .season-stories{gap:18px}.public-site .season-stories article h3{font-size:22px}.public-site .season3-strip{grid-template-columns:1fr}.public-site .archive-photo img{height:260px}.public-site .community-layout{gap:42px}.public-site .footer-grid{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:700px){.public-site .wrap{padding-left:20px;padding-right:20px}.public-site .site-nav .wrap{height:72px;gap:12px}.public-site .brand>img{width:36px;height:36px}.public-site .brand>span{font-size:20px}.public-site .brand small{font-size:6px;margin-top:6px}.public-site .navlinks{top:72px;padding:12px 20px}.public-site .nav-social{display:none}.public-site .hero-layout{grid-template-columns:1fr;padding-top:36px;padding-bottom:24px;gap:30px}.public-site .hero-editorial>.eyeline{font-size:8px;margin-bottom:22px}.public-site .hero-editorial h1{font-size:clamp(48px,12.5vw,79px);line-height:1.01;white-space:normal}.public-site .hero-description{font-size:13px;line-height:1.85;margin-top:22px;max-width:410px}.public-site .hero-actions{margin-top:25px}.public-site .button{font-size:9px;padding:13px 16px;min-height:48px;gap:18px}.public-site .hero-footnote{margin-top:26px;padding-top:18px;gap:15px;font-size:7px}.public-site .hero-photo>img{height:310px;object-position:center 50%}.public-site .hero-photo figcaption{left:20px;bottom:20px}.public-site .hero-photo figcaption strong{font-size:29px}.public-site .brand-ribbon .wrap{gap:10px;padding-top:17px;padding-bottom:17px}.public-site .brand-ribbon span{font-size:clamp(14px,3.8vw,23px)}.public-site .brand-ribbon i{font-size:17px}.public-site .editorial-section{padding:52px 0}.public-site .section-heading{margin-bottom:30px;padding-bottom:15px;gap:14px}.public-site .section-heading>.eyeline{font-size:8px;max-width:180px}.public-site .section-index{font-size:7px;max-width:110px;text-align:right}.public-site .section-heading .text-link{font-size:8px;gap:12px;padding:0;max-width:150px}.public-site .highlights-layout{grid-template-columns:1fr;gap:28px}.public-site .section-lead h2,.public-site .highlights-intro h2,.public-site .community-layout h2{font-size:clamp(36px,10vw,48px)}.public-site .highlights-intro>p{margin:20px 0;font-size:13px}.public-site .content-formats>div{padding:22px 0}.public-site .content-formats h3{font-size:23px}.public-site .content-formats p{font-size:12px}.public-site .section-lead{display:block;margin-bottom:28px}.public-site .section-lead>p{margin-top:20px;max-width:450px;font-size:13px}.public-site .season-stories{grid-template-columns:1fr;gap:36px}.public-site .season-stories img{height:auto;aspect-ratio:4/3;object-fit:cover}.public-site .season-stories article h3{font-size:28px;margin:18px 0}.public-site .season-stories dl>div{margin-top:12px}.public-site .season-stories dt{font-size:9px}.public-site .season-stories dd{font-size:13px}.public-site .season3-strip{margin-top:36px;gap:23px}.public-site .podium-line{gap:14px}.public-site .podium-line small{font-size:6px;line-height:1.6}.public-site .podium-line strong{font-size:18px}.public-site .podium-line span{font-size:10px}.public-site .archive-grid{grid-template-columns:1fr 1fr;gap:12px}.public-site .archive-photo:first-child{grid-column:span 2}.public-site .archive-photo img{height:220px}.public-site .archive-photo:first-child img{height:300px}.public-site .archive-photo>span{left:14px;right:14px;bottom:16px}.public-site .archive-photo strong{font-size:19px}.public-site .archive-photo small{font-size:7px}.public-site .community-layout{grid-template-columns:1fr;gap:30px}.public-site .community-layout>div>p{font-size:13px;line-height:1.9}.public-site .founder-roster article{padding:20px 0}.public-site .footer-top{display:block;padding:42px 0}.public-site .footer-top h2{font-size:38px}.public-site .footer-top .text-link{margin-top:24px}.public-site .footer-grid{gap:30px 20px;padding:34px 0}.public-site .footer-grid>.brand{grid-column:span 2}.public-site .footer-grid>div>p{font-size:8px}.public-site .footer-grid>div>a,.public-site .footer-grid>div>span{font-size:10px;overflow-wrap:anywhere}.public-site .footer-bottom{flex-direction:column;gap:8px;font-size:8px}.public-site .page-hero{padding:36px 0 32px}.public-site .page-hero h1{font-size:38px}.public-site .page-hero p.lede{font-size:13px;margin-top:18px}.public-site .section{padding:38px 0}.public-site .about-intro{padding:36px 0 32px}.public-site .about-title{font-size:38px}.public-site .about-intro-copy{font-size:13px}.public-site .register-cta{padding:28px 22px}.public-site .ticket-main,.public-site .ticket-stub{padding:25px 22px}}
+@media(prefers-reduced-motion:reduce){.public-site *{scroll-behavior:auto;transition:none!important}}
+
+.public-site #main-content{scroll-margin-top:88px;}
+@media(max-width:700px){.public-site #main-content{scroll-margin-top:72px;}}
+
+.public-site .hero-photo>img{object-position:center bottom;}
+
+.public-site .gal-item{width:100%;padding:0;text-align:left;}
+.public-site .gal-item img,.public-site .founder-photo{height:100%;object-fit:cover;}
+@media(hover:none){.public-site .gal-item .cap{opacity:1;}}
+
+.public-site [hidden]{display:none!important;}
+
+.public-site #partners{scroll-margin-top:110px;}
