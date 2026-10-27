@@ -136,12 +136,18 @@ document.addEventListener('DOMContentLoaded', function () {
     uploadForm.reset();
   });
 
-  uploadForm.addEventListener('submit', function (e) {
+  uploadForm.addEventListener('submit', async function (e) {
     e.preventDefault();
+    try { await window.PowerHittersRequireAdmin(supabaseClient); }
+    catch (error) { isAdmin = false; modal.classList.remove('open'); render(); alert(error.message); return; }
     var file = fileInput.files[0];
     if (!file) return;
+    if (file.size > 20 * 1024 * 1024 || !/\.(jpe?g|png|webp|gif|heic|heif)$/i.test(file.name)) {
+      alert('Choose a JPEG, PNG, WebP, GIF or HEIC photo up to 20 MB.'); return;
+    }
     var category = document.getElementById('uploadCategory').value;
-    var caption = document.getElementById('uploadCaption').value;
+    var caption = document.getElementById('uploadCaption').value.trim();
+    if (!['season1', 'season2', 'season3', 'winners'].includes(category) || caption.length > 500) { alert('Choose a valid category and a caption up to 500 characters.'); return; }
     var submitBtn = uploadForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Uploading...';
@@ -200,9 +206,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Show admin upload option only if logged in (same session used on admin.html)
-  supabaseClient.auth.getSession().then(function (res) {
-    isAdmin = !!(res.data && res.data.session);
-    loadPhotos();
+  // Public photos remain available when no approved admin session exists.
+  loadPhotos();
+  async function refreshAccess() {
+    try { await window.PowerHittersRequireAdmin(supabaseClient); isAdmin = true; }
+    catch (error) { isAdmin = false; modal.classList.remove('open'); }
+    render();
+  }
+  refreshAccess();
+  supabaseClient.auth.onAuthStateChange(function () {
+    // Do not call Supabase methods inside the auth callback lock.
+    setTimeout(refreshAccess, 0);
   });
 });

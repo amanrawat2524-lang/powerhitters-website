@@ -2,12 +2,12 @@
 (function (root) {
   'use strict';
   const E = typeof module !== 'undefined' && module.exports ? require('./scorer-engine.js') : root.PowerHittersScoring;
+  const requireAdmin = typeof module !== 'undefined' && module.exports ? require('./admin-access.js') : root.PowerHittersRequireAdmin;
   class ScorerStore {
     constructor(client) { this.client = client; }
 
     async authenticated() {
-      const { data, error } = await this.client.auth.getSession();
-      if (error || !data?.session) throw new Error('Admin login expired. Sign in again before scoring.');
+      await requireAdmin(this.client);
     }
 
     async load() {

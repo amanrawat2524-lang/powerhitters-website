@@ -9,7 +9,8 @@
   }
   function mockClient(initial = fixture()) {
     const db = { live_match: initial ? [copy(initial)] : [], match_history: [] };
-    const client = { db, calls: [], failures: [], delay: 0, session: true,
+    const client = { db, calls: [], failures: [], delay: 0, session: true, admin: true,
+      rpc: async name => ({ data: name === 'ph_tournament_admin' && client.admin, error: null }),
       auth: { getSession: async () => ({ data: { session: client.session ? { user: { id: 'admin' } } : null } }),
         onAuthStateChange: callback => { client.authCallback = callback; },
         signOut: async () => { client.session = false; client.authCallback?.('SIGNED_OUT', null); } },

@@ -18,7 +18,7 @@ async function mount(source, initial) {
   return { get: document.getElementById, update: match => realtime({ new: match }) };
 }
 const html = fs.readFileSync(require.resolve('../live.html'), 'utf8');
-const source = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1];
+const source = fs.readFileSync(require.resolve('../js/live-page.js'), 'utf8');
 test('public page renders live legal overs/target and realtime tie', async () => {
   const s = fixture({ innings: 2, runs: 9, legal_balls: 7, target: 21 });
   const ui = await mount(source, s);
