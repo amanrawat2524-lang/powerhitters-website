@@ -27,14 +27,6 @@
 .partners-page .pp-logo img{display:block;width:100%;height:100%;object-fit:contain}
 .partners-page .pp-partner-card h3{font-family:'Work Sans',sans-serif;font-size:17px;line-height:1.4;font-weight:800;color:var(--pp-green)}
 .partners-page .pp-partner-card>p{font:9px 'JetBrains Mono',monospace;line-height:1.7;text-transform:uppercase;color:#53624e;margin-top:9px;letter-spacing:.03em}
-.partners-page .pp-record{padding:42px 0;background:var(--turf-mid);color:var(--pp-cream);border-block:1px solid #31513c}
-.partners-page .pp-record>.wrap{display:grid;grid-template-columns:.9fr 1.6fr;align-items:center;gap:44px}
-.partners-page .pp-record h2{font-size:34px}
-.partners-page .pp-record-intro>p{font-size:13px;line-height:1.8;color:var(--chalk-dim);margin-top:16px;max-width:310px}
-.partners-page .pp-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.partners-page .pp-stat-grid>div{display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:12px;border-left:1px solid #507052;padding-left:20px;min-width:0}
-.partners-page .pp-stat-grid dd{font:400 clamp(30px,3.5vw,46px)/1.1 'Anton',sans-serif;color:var(--pp-yellow);white-space:nowrap}
-.partners-page .pp-stat-grid dt{font:9px 'JetBrains Mono',monospace;line-height:1.8;color:var(--chalk-dim)}
 .partners-page .pp-benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
 .partners-page .pp-benefit{padding-top:22px;border-top:2px solid #c7cdbd}
 .partners-page .pp-number{display:inline-flex;align-items:center;gap:12px;font:11px 'JetBrains Mono',monospace;color:#53624e}
@@ -59,10 +51,6 @@
 .partners-page .pp-partner-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
 .partners-page .pp-partner-card{grid-column:span 2}
 .partners-page .pp-partner-card:nth-child(4){grid-column:2 / span 2}
-.partners-page .pp-record>.wrap{grid-template-columns:1fr;gap:30px}
-.partners-page .pp-record-intro{display:flex;align-items:center;justify-content:space-between;gap:30px}
-.partners-page .pp-record-intro>p{margin:0}
-.partners-page .pp-stat-grid dd{font-size:clamp(32px,4vw,44px)}
 }
 @media(max-width:700px){
 .partners-page .pp-hero{padding:38px 0}
@@ -85,14 +73,6 @@
 .partners-page .pp-logo{height:112px;padding:4px;margin-bottom:18px}
 .partners-page .pp-partner-card h3{font-size:15px}
 .partners-page .pp-partner-card>p{font-size:8px}
-.partners-page .pp-record{padding:34px 0}
-.partners-page .pp-record-intro{display:block}
-.partners-page .pp-record-intro>p{margin-top:16px;font-size:14px;max-width:400px}
-.partners-page .pp-record h2{font-size:34px}
-.partners-page .pp-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
-.partners-page .pp-stat-grid dd{font-size:clamp(28px,8.5vw,40px)}
-.partners-page .pp-stat-grid>div{padding-left:16px}
-.partners-page .pp-stat-grid dt{font-size:10px}
 .partners-page .pp-benefit-grid{grid-template-columns:1fr;gap:28px}
 .partners-page .pp-benefit h3{margin-top:18px;font-size:25px}
 .partners-page .pp-opportunity-list{margin-top:28px}
