@@ -1,5 +1,10 @@
 /* Public navigation and a read-only photo selection. Never writes to Supabase. */
 document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.founder-photo').forEach(function (photo) {
+    function fallback() { photo.hidden = true; if (photo.nextElementSibling) photo.nextElementSibling.hidden = false; }
+    photo.addEventListener('error', fallback);
+    if (photo.complete && !photo.naturalWidth) fallback();
+  });
   var menu = document.getElementById('site-menu');
   var toggle = document.querySelector('.site-nav .burger');
   if (menu && toggle) {

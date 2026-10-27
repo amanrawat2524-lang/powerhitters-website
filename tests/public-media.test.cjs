@@ -12,7 +12,7 @@ async function mount(fetchImpl) {
   const grid = new Element('grid');
   const fallback = new Element('fallback'); grid.children = [fallback];
   let ready, request;
-  const document = {
+  const document = { querySelectorAll: () => [],
     addEventListener(event, fn) { if (event === 'DOMContentLoaded') ready = fn; },
     getElementById(id) { return id === 'homeGallery' ? grid : null; },
     querySelector() { return null; },

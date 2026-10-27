@@ -277,7 +277,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.location.href = 'admin.html';
   });
   client.auth.onAuthStateChange((event, session) => {
-    authenticated = !!session;
+    // A session alone never grants scorer access. Initial/recovery checks use the admin RPC.
+    if (!session) authenticated = false;
     if (!session) {
       redoStack = [];
       pending = null;

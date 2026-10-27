@@ -26,7 +26,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // LOGIN / LOGOUT
   // =========================================
 
-  function showDashboard() {
+  async function showDashboard() {
+    try { await window.PowerHittersRequireAdmin(supabaseClient); }
+    catch (error) {
+      showLogin();
+      loginError.textContent = error.message;
+      loginError.style.display = 'block';
+      return;
+    }
     loginSection.style.display = 'none';
     dashboardSection.style.display = 'block';
     logoutBtn.style.display = 'inline-flex';
@@ -38,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
     loginSection.style.display = 'block';
     dashboardSection.style.display = 'none';
     logoutBtn.style.display = 'none';
+    tableBody.replaceChildren();
+    statsBar.replaceChildren();
   }
 
   supabaseClient.auth.getSession().then(function (res) {
@@ -48,6 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
       showLogin();
     }
 
+  });
+
+  supabaseClient.auth.onAuthStateChange(function (event, session) {
+    if (!session) showLogin();
   });
 
   loginForm.addEventListener('submit', function (event) {
@@ -317,7 +330,9 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleBtn.textContent =
           isPaid ? 'Mark Pending' : 'Mark Paid';
 
-        toggleBtn.addEventListener('click', function () {
+        toggleBtn.addEventListener('click', async function () {
+          try { await window.PowerHittersRequireAdmin(supabaseClient); }
+          catch (error) { showLogin(); alert(error.message); return; }
 
           var newStatus =
             isPaid ? 'pending' : 'paid';
