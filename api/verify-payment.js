@@ -29,18 +29,23 @@ export async function POST(request) {
       );
     }
 
-    const body = await request.json();
+    let body;
+    try { body = await request.json(); }
+    catch { return Response.json({ success: false, error: 'Invalid JSON body.' }, { status: 400 }); }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return Response.json({ success: false, error: 'Invalid payment data.' }, { status: 400 });
+    }
 
-    const registrationId = body.registrationId;
+    const registrationId = typeof body.registrationId === 'number' && Number.isSafeInteger(body.registrationId) && body.registrationId > 0
+      ? String(body.registrationId) : body.registrationId;
     const paymentId = body.razorpay_payment_id;
     const checkoutOrderId = body.razorpay_order_id;
     const razorpaySignature = body.razorpay_signature;
 
     if (
-      !registrationId ||
-      !paymentId ||
-      !checkoutOrderId ||
-      !razorpaySignature
+      ![registrationId, paymentId, checkoutOrderId].every(value =>
+        typeof value === 'string' && value.length > 0 && value.length <= 128) ||
+      typeof razorpaySignature !== 'string' || !/^[a-f0-9]{64}$/i.test(razorpaySignature)
     ) {
       return Response.json(
         {
@@ -108,22 +113,6 @@ export async function POST(request) {
       );
     }
 
-    // Already verified earlier
-    if (
-      paymentRow.verified === true &&
-      paymentRow.razorpay_payment_id === paymentId &&
-      paymentRow.status === 'captured'
-    ) {
-      return Response.json({
-        success: true,
-        already_verified: true,
-        payment_id: paymentId,
-        order_id: storedOrderId,
-        amount_paid: paymentRow.amount_paise,
-        remaining_amount: 150000
-      });
-    }
-
     // Checkout order must match our stored order
     if (checkoutOrderId !== storedOrderId) {
       return Response.json(
@@ -158,6 +147,22 @@ export async function POST(request) {
         },
         { status: 400 }
       );
+    }
+
+    // Already verified earlier
+    if (
+      paymentRow.verified === true &&
+      paymentRow.razorpay_payment_id === paymentId &&
+      paymentRow.status === 'captured'
+    ) {
+      return Response.json({
+        success: true,
+        already_verified: true,
+        payment_id: paymentId,
+        order_id: storedOrderId,
+        amount_paid: paymentRow.amount_paise,
+        remaining_amount: 150000
+      });
     }
 
     // Fetch payment directly from Razorpay
