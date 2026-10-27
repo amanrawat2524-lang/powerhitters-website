@@ -20,4 +20,8 @@
     <loc>https://powerhitters.co.in/about.html</loc>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://powerhitters.co.in/partners.html</loc>
+    <priority>0.6</priority>
+  </url>
 </urlset>
