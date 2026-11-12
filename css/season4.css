@@ -1,0 +1,39 @@
+/* Season 4 teaser only. Existing site chrome and season history are unchanged. */
+.public-site .s4-teaser{position:relative;overflow:hidden;background:var(--turf-darker);color:var(--chalk);border-block:1px solid var(--line)}
+.public-site .s4-teaser::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(115deg,transparent 0 120px,rgba(243,239,224,.025) 120px 121px)}
+.public-site .s4-teaser-layout{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-top:56px;padding-bottom:56px}
+.public-site .s4-identity>.eyeline{color:var(--chalk-dim)}
+.public-site .s4-identity>.s4-chapter{color:var(--floodlight);margin-top:12px}
+.public-site .s4-number{display:block;font:400 clamp(180px,22vw,290px)/.88 'Anton',sans-serif;letter-spacing:-.045em;margin-top:30px;color:var(--chalk)}
+.public-site .s4-copy{border-left:1px solid var(--line-strong);padding:24px 0 24px 48px}
+.public-site .s4-status{display:inline-block;font:700 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--floodlight);border:1px solid #806c30;padding:8px 12px;margin:0}
+.public-site .s4-copy h1,.public-site .s4-copy h2{font-size:clamp(36px,4.7vw,64px);line-height:1.04;color:var(--chalk);margin:26px 0 30px}
+.public-site .s4-copy .button{white-space:nowrap}
+.public-site .s4-page .s4-teaser-layout{min-height:calc(100svh - 88px);padding-top:64px;padding-bottom:64px}
+.public-site .s4-feature-section{background:var(--chalk);padding:40px 0 0}
+.public-site .s4-feature{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center;background:var(--turf-darker);color:var(--chalk);border-top:3px solid var(--floodlight);padding:32px}
+.public-site .s4-feature-number{font:400 116px/.9 'Anton',sans-serif;letter-spacing:-.04em}
+.public-site .s4-feature-copy .eyeline{color:var(--chalk-dim);margin:0 0 12px}
+.public-site .s4-feature-copy h2{font-size:clamp(26px,3vw,38px);line-height:1.15;margin:0 0 18px;color:var(--chalk)}
+@media(max-width:960px){
+.public-site .s4-teaser-layout{gap:32px}
+.public-site .s4-copy{padding-left:28px}
+.public-site .s4-feature{grid-template-columns:auto 1fr;gap:26px}
+.public-site .s4-feature>.button{grid-column:2;justify-self:start}
+.public-site .s4-feature-number{grid-row:span 2;font-size:140px}
+}
+@media(max-width:700px){
+.public-site .s4-teaser-layout{grid-template-columns:1fr;gap:30px;padding-top:38px;padding-bottom:38px}
+.public-site .s4-identity>.eyeline{font-size:10px}
+.public-site .s4-number{font-size:clamp(170px,45vw,250px);margin-top:24px}
+.public-site .s4-copy{border-left:0;border-top:1px solid var(--line-strong);padding:26px 0 0}
+.public-site .s4-copy h1,.public-site .s4-copy h2{font-size:clamp(36px,10vw,52px);margin:22px 0 26px}
+.public-site .s4-page .s4-teaser-layout{min-height:calc(100svh - 72px);padding-top:38px;padding-bottom:38px}
+.public-site .s4-page .s4-copy .text-link{font-size:10px;gap:18px}
+.public-site .s4-feature-section{padding-top:28px}
+.public-site .s4-feature{grid-template-columns:72px minmax(0,1fr);gap:20px;padding:24px 20px}
+.public-site .s4-feature-number{font-size:92px;grid-row:1}
+.public-site .s4-feature-copy h2{font-size:27px}
+.public-site .s4-feature-copy .eyeline{font-size:9px}
+.public-site .s4-feature>.button{grid-column:1 / -1;font-size:10px;min-height:52px}
+}
